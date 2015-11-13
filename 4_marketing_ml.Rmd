@@ -1,0 +1,27 @@
+# Case study
+
+## Import
+
+```{r}
+library(data.table)
+bank <- fread("bank-full.csv")
+
+set.seed(123)
+n <- nrow(bank)
+bank_scrambled <- bank[sample(1:n),]
+train <- bank_scrambled[1:floor(0.7*n),]
+test <- bank_scrambled[(floor(0.7*n)+1):n,]
+
+library(rpart)
+tree <- rpart(y ~ ., train, method = "class")
+
+library(rattle)
+library(rpart.plot)
+library(RColorBrewer)
+fancyRpartPlot(tree)
+
+pred <- predict(tree, test, type = "class")
+conf <- table(test$y, pred)
+print(sum(diag(conf)) / sum(conf))
+
+```

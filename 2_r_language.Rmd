@@ -1,0 +1,217 @@
+# Fundamentals
+
+- Explore the console
+- Variable assignment: `<-`
+
+```{r}
+my_numeric <- 23
+my_numeric
+my_char <- "hello"
+my_char
+my_logical <- TRUE
+my_logical
+```
+
+As you execute R commands, you accumulate a workspace:
+
+```{r}
+ls() # list objects
+rm(my_numeric) # remove the my_numeric object
+ls() # list objects: my_numeric no longer in there
+```
+
+# Data structures
+
+## Vectors
+
+- 1 Dimensional
+- Single type
+- `c()`
+
+```{r}
+vec <- c(1,2,3,4)
+vec
+1:4 # is equivalent
+c("i", "like", "R")
+c("a", 2, 3) # coercion
+```
+
+Named vectors
+
+```{r}
+named_vec <- c(el1 = 1, el2 = -2, el3 = 5) # naming and specification in 1 call
+named_vec
+```
+
+Subsetting vectors (single square brackets)
+
+```{r}
+vec[1]
+vec[c(1,3)]
+named_vec["el1"]
+named_vec[c("el1","el2")]
+```
+
+Atomic types are also vectors (of length 1)!
+
+```{r}
+my_numeric <- 23
+is.vector(my_numeric)
+length(my_numeric)
+```
+
+## Lists
+
+- 1 Dimensional
+- Can contain different types.
+- contain numerics, logicals, vectors, lists ...
+- `list()` function
+
+```{r}
+list1 <- list(1, -2, 5)
+list1
+print(list1)
+str(list1) # display structure compactly
+
+list2 <- list("a", 2, 3) # no coercion
+str(list2)
+
+list3 <- list("a", 2, list("i", "like", "R")) # lists can contain lists!
+str(list3)
+```
+
+Named lists:
+
+```{r}
+named_list <- list(el1 = "a", el2 = 2, el3 = list("i", "like", "R")) # same result
+str(named_list)
+```
+
+Subsetting lists (_double_ square brackets for list _elements_):
+
+```{r}
+list3[1] # list of length 1
+list3[[1]] # list element at position 1
+list3[1:2] # list of length 2
+list3[[3]][[2]] # second element of list at third position in list3
+named_list[["el3"]][[2]]
+named_list$el3[[2]] # same thing
+```
+
+## Data Frames
+
+- 2 Dimensional
+- Heterogeneous content
+- Under the hood: a named list with same-length vectors
+- Typical structure for data sets: rows are observations, columns are variables
+- function `data.frame()`
+
+```{r, error = TRUE}
+# built-in data.frame in R
+iris
+
+df <- data.frame(1:5, c("A","B","C","D","E"))
+df_error <- data.frame(1:5, c("A","B","C","D"))
+
+df_named <- data.frame(numbers = 1:5, letters = c("A","B","C","D","E")) # same as a list
+df_named
+```
+
+Different ways to subset data frames
+
+```{r}
+df_named[2, ] # 2nd row
+df_named[, 1] # 1st column
+df_named[2,1] # value at 2nd row and 1st column
+df_named$numbers # 'numbers' column, is a vector
+
+# data frame is a list under the hood
+str(df_named)
+df_named[[1]] # data frame is a vector under the hood
+```
+
+# Other programming concepts
+
+## Control Structures
+
+- use results of comparators to customize behavior
+
+```{r}
+temp_celsius <- 68
+if(temp_celsius <= 0) {
+  print("Brrrr!")
+} else {
+  print("It's not freezing.")
+}
+
+color <- "red"
+if(color == "green") {
+  print("You love nature!")
+} else if(color == "red") {
+  print("You like campfires!")
+} else {
+  print("I can't really tell what you like..")
+}
+```
+    
+## Loops
+    
+- repeated execution of code chunks
+
+```{r}
+for(i in 1:5) {
+  print(i)
+}
+
+hobbies <- c("cycling", "movies", "data science")
+for(h in hobbies) {
+  print(h)
+}
+```
+
+## Functions
+
+- Make your code reusable.
+- Objects in the functions are local to the function.
+- Can return any data type, or NULL.
+    
+```{r error = TRUE}
+double <- function(x) {
+  y <- 2*x
+  return(y)
+}
+double(12)
+y # Not available due to local scope
+
+ask_nicely <- function(question) {
+  print(paste("Could you", question, "please?"))
+}
+ask_nicely("help me with R")
+```
+
+- *apply: avoid the for loop
+
+```{r}
+people <- c("Barack Obama", "Hillary Clinton", "Frank Underwood")
+?nchar   # ? for help on a function
+lapply(people, nchar)
+sapply(people, nchar)
+
+get_first_name <- function(name) {
+  strsplit(name, split = " ")[[1]][1]
+}
+lapply(people, get_first_name)
+sapply(people, get_first_name)
+```
+
+## R Packages
+
+R Packages: sets of R functions, data and compiled code to help solve a typical problem. Packages for visualization, high frequency trading, advanced statistical analyses, machine learning. Most of them are on [CRAN](http://cran.r-project.org/), the _Comprehensive R Archive Network_.
+
+```{r error = TRUE}
+qplot(iris$Sepal.Length, iris$Sepal.Width) # function of the ggplot2 package
+# install.packages("ggplot2")  # only if not yet installed.
+library(ggplot2)
+qplot(iris$Sepal.Length, iris$Sepal.Width)
+```
+

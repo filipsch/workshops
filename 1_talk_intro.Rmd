@@ -1,0 +1,43 @@
+---
+title: 'An Introduction to R'
+author: "Filip Schouwenaars, DataCamp"
+output: beamer_presentation
+---
+
+# About DataCamp
+
+- Online Data Science School
+- Video lessons, interactive exerises
+- www.datacamp.com/demo
+
+# About the Workshop
+
+- Basic programming background
+- Theoretical intro to R
+- Case study: movies
+- Questions? Yes, please!
+
+# R
+
+- Auckland, New Zealand
+- Over 20 years old
+- Statistical Analyses
+- Open source
+- Command-Line interface > Point and click
+- Share code through R scripts and packages
+- Huge vibrant online community
+- Has to fit in the main memory
+
+# Use Python instead?
+
+- Both have loads of reliable libraries
+- R: get results fast
+- Python: more work, but more customization possible
+- R wins when it comes to visualization
+- Python is a 'fuller' programming language
+
+# Preparation
+
+- Install R: http://cran.rstudio.com
+- Install RStudio: http://www.rstudio.com
+
