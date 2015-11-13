@@ -1,20 +1,13 @@
 # Fundamentals
 
-- Explore the console
+- Explore the console: simple calculations
 - Variable assignment: `<-`
+- As you execute R commands, you accumulate a workspace:
 
 ```{r}
-my_numeric <- 23
-my_numeric
+my_numeric <- 5
 my_char <- "hello"
-my_char
-my_logical <- TRUE
-my_logical
-```
-
-As you execute R commands, you accumulate a workspace:
-
-```{r}
+my_logical <- FALSE
 ls() # list objects
 rm(my_numeric) # remove the my_numeric object
 ls() # list objects: my_numeric no longer in there

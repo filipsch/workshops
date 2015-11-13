@@ -14,16 +14,14 @@ output: beamer_presentation
 
 - Basic programming background
 - Theoretical intro to R
-- Case study: movies
 - Questions? Yes, please!
 
 # R
 
-- Auckland, New Zealand
-- Over 20 years old
-- Statistical Analyses
+- Language for Statistical Computing
+- New Zealand, 80s
 - Open source
-- Command-Line interface > Point and click
+- Command-Line > Point and click
 - Share code through R scripts and packages
 - Huge vibrant online community
 - Has to fit in the main memory
