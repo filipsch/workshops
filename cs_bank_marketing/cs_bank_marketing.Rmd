@@ -1,0 +1,84 @@
+## Case study
+
+Typical steps of an analysis in R:
+
+- Import
+- Explore
+- Model
+- Visualize
+- Report
+
+## Import
+
+Using the `fread()` function from the `data.table` package.
+
+```{r import}
+library(data.table)
+bank <- fread("~/courses/talk-r/cs_bank_marketing/bank-full.csv", stringsAsFactors = TRUE)
+bank <- as.data.frame(bank)
+```
+
+## Explore
+
+```{r explore}
+head(bank)
+str(bank)
+summary(bank)
+
+# make y have a more meaningful name.
+names(bank)[ncol(bank)] <- "subscribed"
+
+hist(bank$age)
+
+library(ggvis)
+library(dplyr)
+bank %>% group_by(subscribed) %>% ggvis(~age, fill = ~subscribed) %>% layer_densities()
+bank %>% ggvis(~education, fill = ~subscribed) %>% layer_bars()
+
+bank %>% 
+  group_by(education) %>%
+  summarise(pct_yes = sum(subscribed == "yes")/n())
+```
+
+## Model
+
+```{r model}
+set.seed(123)
+n <- nrow(bank)
+bank_scrambled <- bank[sample(1:n),]
+train <- bank_scrambled[1:floor(0.7*n),]
+test <- bank_scrambled[(floor(0.7*n)+1):n,]
+
+library(rpart)
+tree <- rpart(subscribed ~ ., train, method = "class")
+```
+
+## Visualize
+
+```{r viz}
+library(rattle)
+library(rpart.plot)
+library(RColorBrewer)
+fancyRpartPlot(tree)
+```
+
+Does this model generalize to unseen observations? Try out the model on a test set, that you haven't used to train your model.
+
+```{r predict}
+pred <- predict(tree, test, type = "class")
+
+# build confusion matrix
+conf <- table(test$subscribed, pred)
+
+# calculate precision and recall
+precision <- conf[1,1] / (conf[1,1] + conf[2,1])
+precision
+recall <- conf[1,1] / (conf[1,1] + conf[2,2])
+recall
+```
+
+Back to the drawing board?
+
+## Report
+
+Just _knit_ this file using `knitr`!
