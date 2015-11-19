@@ -7,7 +7,11 @@ output: beamer_presentation
 ## About DataCamp
 
 - Online Data Science School
-- Video lessons, interactive exerises
+- Trained +230,000 data science professionals
+    + finance, marketing, technology, etc.
+- Video lessons and coding challenge
+    + In-browser, self-paced
+- Instructors from Princeton, Microsoft, RStudio, Duke, etc.
 - www.datacamp.com/demo
 
 ## About the Workshop
@@ -19,7 +23,7 @@ output: beamer_presentation
 ## R
 
 - Language for Statistical Computing
-- New Zealand, 80s
+- New Zealand, 90s
 - Open source
 - Command-Line > Point and click
 - Share code through R scripts and packages
@@ -37,10 +41,16 @@ output: beamer_presentation
 ## How we use R for marketing
 
 - Dashboards
-  - Users
-  - Subscribers
-  - Revenue
-  - Churn
+    + Users
+    + Subscribers
+    + Revenue
+    + Churn
 - The "aha" moment
 - Analysis of email campaigns
+- ...
+
+## Get Started
+
+- Install R & RStudio
+- Download zip: 
 
