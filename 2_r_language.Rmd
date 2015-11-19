@@ -196,6 +196,7 @@ sapply(people, nchar)
 get_first_name <- function(name) {
   strsplit(name, split = " ")[[1]][1]
 }
+
 lapply(people, get_first_name)
 sapply(people, get_first_name)
 ```
