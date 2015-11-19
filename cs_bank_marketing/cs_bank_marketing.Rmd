@@ -18,7 +18,7 @@ Typical steps of an analysis in R:
 ## Import
 
 ```{r import}
-bank <- read.csv("~/courses/talk-r/cs_bank_marketing/bank-full.csv", sep = ";")
+bank <- read.csv("~/Desktop/dmws/cs_bank_marketing/bank-full.csv", sep = ";")
 ```
 
 ## Explore
