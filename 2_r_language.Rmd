@@ -2,6 +2,7 @@
 
 - Explore the console: simple calculations
 - Variable assignment: `<-`
+- Different data types.
 - As you execute R commands, you accumulate a workspace:
 
 ```{r}
@@ -12,6 +13,8 @@ ls() # list objects
 rm(my_numeric) # remove the my_numeric object
 ls() # list objects: my_numeric no longer in there
 ```
+
+- http://www.datacamp.com/courses/workshop
 
 # Data structures
 
@@ -97,7 +100,7 @@ named_list$el3[[2]] # same thing
 - Heterogeneous content
 - Under the hood: a named list with same-length vectors
 - Typical structure for data sets: rows are observations, columns are variables
-- function `data.frame()`
+- `data.frame()` function
 
 ```{r, error = TRUE}
 # built-in data.frame in R
