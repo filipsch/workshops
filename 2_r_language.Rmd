@@ -14,6 +14,9 @@ rm(my_numeric) # remove the my_numeric object
 ls() # list objects: my_numeric no longer in there
 ```
 
+- R scripts
+- Lines of R code, executed one after the other
+
 # Data structures
 
 ## Vectors
