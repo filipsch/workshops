@@ -52,5 +52,8 @@ output: beamer_presentation
 ## Get Started
 
 - Install R & RStudio
-- Download zip: 
+- Download zip: http://bit.ly/dmws
+- Move folder to Desktop
+- Open up RStudio
+- Set working directory inside RStudio
 
