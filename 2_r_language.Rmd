@@ -14,8 +14,6 @@ rm(my_numeric) # remove the my_numeric object
 ls() # list objects: my_numeric no longer in there
 ```
 
-- http://www.datacamp.com/courses/workshop
-
 # Data structures
 
 ## Vectors
@@ -125,6 +123,12 @@ df_named$numbers # 'numbers' column, is a vector
 str(df_named)
 df_named[[1]] # data frame is a vector under the hood
 ```
+
+# Practice
+
+- http://www.datacamp.com/courses/workshop
+- Create account
+- Log in
 
 # Other programming concepts
 
