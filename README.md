@@ -1,3 +1,3 @@
-# Talk: Introduction to R
+# Workshop: Introduction to R
 
-Concise introduction to R
+Live workshop to introduce the R language.

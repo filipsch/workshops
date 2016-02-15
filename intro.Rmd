@@ -1,0 +1,42 @@
+---
+title: An Introduction to R
+author: Filip Schouwenaars, DataCamp
+output: beamer_presentation
+---
+
+## About DataCamp
+
+- Online Data Science School
+- +300,000 registered users
+    + finance, marketing, technology, etc.
+- Video lessons and coding challenge
+    + In-browser, self-paced
+- Instructors from Princeton, Harvard, Duke etc.
+- www.datacamp.com/demo
+
+## About the Workshop
+
+- Basic intro to R
+- Case Study
+- Questions? Yes please!
+
+## R
+
+- Language for Statistical Computing
+- New Zealand, 90s
+- Open source
+- Command-Line > Point and click
+- Share code through R scripts and packages
+- Huge vibrant online community
+- Great for visualization
+- Has to fit in the main memory
+
+## Get Started!
+
+- Install R: https://cran.rstudio.com/
+- Install RStudio: https://www.rstudio.com/products/rstudio/download/
+- Download zip: http://bit.ly/ulyissis
+- Unzip
+- Open up RStudio
+- Set working directory to point to unzipped folder
+
