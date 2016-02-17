@@ -7,6 +7,13 @@
 - R scripts.
 - Lines of R code, executed one after the other
 
+```
+score <- 12
+course <- "algebra"
+passed <- TRUE
+ls()
+```
+
 # Data structures
 
 ## Vectors
@@ -14,75 +21,60 @@
 - 1 Dimensional
 - Single type
 - `c()`
+- Subsetting with `[ ]`
+- Single numbers are also vectors, of length 1!
 
 ```{r}
-vec <- c(1,2,3,4)
-vec
-1:4 # is equivalent
-c("i", "like", "R")
-c("a", 2, 3) # coercion
-```
+# creation
+scores <- c(12, 17, 19, 9)
+scores
+courses <- c("algebra", "physics", "management", "religion")
+courses
 
-Named vectors
+# single type!
+c("algebra", 12) # coercion
 
-```{r}
-named_vec <- c(el1 = 1, el2 = -2, el3 = 5) # naming and specification in 1 call
-named_vec
-```
+# naming
+scores <- c(algebra = 12, physics = 17, management = 19, religion = 9)
+scores
 
-Subsetting vectors (single square brackets)
-
-```{r}
-vec[1]
-vec[c(1,3)]
+# subsetting
+scores[1]
 named_vec["el1"]
 named_vec[c("el1","el2")]
-```
-
-Atomic types are also vectors (of length 1)!
-
-```{r}
-my_numeric <- 23
-is.vector(my_numeric)
-length(my_numeric)
 ```
 
 ## Lists
 
 - 1 Dimensional
-- Can contain different types.
-- contain numerics, logicals, vectors, lists ...
-- `list()` function
+- Different types: numerics, logicals, vectors, lists ...
+- `list()`
+- Subsetting with `[[ ]]`
 
 ```{r}
-list1 <- list(1, -2, 5)
-list1
-print(list1)
-str(list1) # display structure compactly
+summ <- list("algebra", 12, TRUE, "physics", 17, TRUE, "management", 19, TRUE, "relgion", 9, FALSE)
+summ
+str(summ)
 
-list2 <- list("a", 2, 3) # no coercion
-str(list2)
+summ2 <- list(list("algebra", 12, TRUE), 
+              list("physics", 17, TRUE), 
+              list("management", 19, TRUE), 
+              list("relgion", 9, FALSE))
+str(summ2)
 
-list3 <- list("a", 2, list("i", "like", "R")) # lists can contain lists!
-str(list3)
-```
 
-Named lists:
+summ3 <- list(list(course = "algebra", score = 12, passed = TRUE),
+              list(course = "physics", score = 17, passed = TRUE),
+              list(course = "management", score = 19, passed = TRUE),
+              list(course = "relgion", score = 9, passed = FALSE))
+str(summ3)
 
-```{r}
-named_list <- list(el1 = "a", el2 = 2, el3 = list("i", "like", "R")) # same result
-str(named_list)
-```
+summ3[[1]]
+summ3[[1]][[1]]
+summ3[[1]]$course
 
-Subsetting lists (_double_ square brackets for list _elements_):
-
-```{r}
-list3[1] # list of length 1
-list3[[1]] # list element at position 1
-list3[1:2] # list of length 2
-list3[[3]][[2]] # second element of list at third position in list3
-named_list[["el3"]][[2]]
-named_list$el3[[2]] # same thing
+summ3[[3]][[2]]
+summ3[[3]]$score
 ```
 
 ## Data Frames
@@ -90,32 +82,56 @@ named_list$el3[[2]] # same thing
 - 2 Dimensional
 - Heterogeneous content
 - Under the hood: a named list with same-length vectors
-- Typical structure for data sets: rows are observations, columns are variables
+- Typical structure for data sets: rows are observations, columns are variables.
 - `data.frame()` function
+- Different ways of subsetting
 
 ```{r, error = TRUE}
-# built-in data.frame in R
-iris
+options(stringsAsFactors=FALSE)
 
-df <- data.frame(1:5, c("A","B","C","D","E"))
-df_error <- data.frame(1:5, c("A","B","C","D"))
+courses <- c("algebra", "physics", "management", "religion")
+scores <- c(12, 17, 19, 9)
+passed <- c(TRUE, TRUE, TRUE, FALSE)
 
-df_named <- data.frame(numbers = 1:5, letters = c("A","B","C","D","E")) # same as a list
-df_named
+results <- data.frame(courses, scores, passed)
+results
+
+results[2, 1] # 2nd row, 1st column
+results[2, ] # entire 2nd row
+results[, 1] # entire 1st column
+results$courses
+
+# data frame is a list!
+str(results)
 ```
 
-Different ways to subset data frames
+# Functions and Packages
 
-```{r}
-df_named[2, ] # 2nd row
-df_named[, 1] # 1st column
-df_named[2,1] # value at 2nd row and 1st column
-df_named$numbers # 'numbers' column, is a vector
+## Functions
 
-# data frame is a list under the hood
-str(df_named)
-df_named[[1]] # data frame is a vector under the hood
+- Tons of them available in R.
+- Solve particular, well-defined problem.
+- "Black box".
+- Can also write your own.
+    
 ```
+# What is your average score?
+results
+results$scores
+mean(results$scores) # mean is a base R function
+```
+## R Packages
+
+R Packages: sets of R functions, data and compiled code to help solve a typical problem. Packages for visualization, high frequency trading, advanced statistical analyses, machine learning. Most of them are on [CRAN](http://cran.r-project.org/), the _Comprehensive R Archive Network_.
+
+```{r error = TRUE}
+datatable(results)    # function the DT package
+
+install.packages("DR")
+library(DT)
+datatable(results)
+```
+
 
 # Other programming concepts
 
@@ -154,52 +170,5 @@ hobbies <- c("cycling", "movies", "data science")
 for(h in hobbies) {
   print(h)
 }
-```
-
-## Functions
-
-- Make your code reusable.
-- Objects in the functions are local to the function.
-- Can return any data type, or NULL.
-    
-```{r error = TRUE}
-double <- function(x) {
-  y <- 2*x
-  return(y)
-}
-double(12)
-y # Not available due to local scope
-
-ask_nicely <- function(question) {
-  print(paste("Could you", question, "please?"))
-}
-ask_nicely("help me with R")
-```
-
-- *apply: avoid the for loop
-
-```{r}
-people <- c("Barack Obama", "Hillary Clinton", "Frank Underwood")
-?nchar   # ? for help on a function
-lapply(people, nchar)
-sapply(people, nchar)
-
-get_first_name <- function(name) {
-  strsplit(name, split = " ")[[1]][1]
-}
-
-lapply(people, get_first_name)
-sapply(people, get_first_name)
-```
-
-## R Packages
-
-R Packages: sets of R functions, data and compiled code to help solve a typical problem. Packages for visualization, high frequency trading, advanced statistical analyses, machine learning. Most of them are on [CRAN](http://cran.r-project.org/), the _Comprehensive R Archive Network_.
-
-```{r error = TRUE}
-qplot(iris$Sepal.Length, iris$Sepal.Width) # function of the ggplot2 package
-# install.packages("ggplot2")  # only if not yet installed.
-library(ggplot2)
-qplot(iris$Sepal.Length, iris$Sepal.Width)
 ```
 
