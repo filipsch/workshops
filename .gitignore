@@ -2,4 +2,7 @@
 .Rproj.user
 *.zip
 *.Rproj
-
+*/*.html
+*.html
+*/*.pdf
+*.pdf
