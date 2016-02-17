@@ -1,0 +1,146 @@
+# Case study
+
+Typical actions you perform on your data:
+
+- Import
+- Explore
+- Visualize
+- Model
+- Report
+
+```{r}
+# Prepare R session
+setwd("~/courses/r-workshop")
+```
+
+## Import
+
+- R can deal with many sources, online and offline
+- Dedicated application-specific packages (DBs, excel, text files)
+
+```{r}
+# read one part from database
+# install.packages(RSQLite)
+library(RSQLite)
+con <- dbConnect(SQLite(), "omdb.db")
+dbListTables(con)
+omdb <- dbReadTable(con, "omdb")
+
+# read.csv is a built-in function
+tomatoes <- read.csv("rotten_tomatoes.csv", header = TRUE)
+```
+
+## Explore
+
+Get a first feel for your data: `summary()`, `head()`, `tail()`, `names()`.
+
+```{r}
+# explore omdb
+names(omdb)
+head(omdb)
+summary(omdb)
+
+# explore tomatoes
+names(tomatoes)
+tail(tomatoes)
+summary(tomatoes)
+```
+
+Use the `merge()` function to merge `tomatoes` and `omdb`: one data set.
+
+```{r}
+# Do the merge
+movies <- merge(omdb, tomatoes, by="ID")
+
+# Check out the result
+names(movies)
+head(movies)
+summary(movies)
+```
+
+There is still some cleaning needed!
+
+```{r}
+# let's work with imdbRating and userRating
+names(movies)[names(movies) == "userRating"] <- "rottenRating"
+names(movies)[names(movies) == "userReviews"] <- "rottenVotes"
+
+# Remove NA rating info, before it messes up our analyses
+row_misses_info <-  is.na(movies$imdbVotes) | is.na(movies$rottenVotes) | is.na(movies$imdbRating) | is.na(movies$rottenRating)
+summary(row_misses_info)
+movies <- movies[!row_misses_info, ]
+
+# Remove movies that haven't got 10000 votes for both imdb and rotten tomatoes
+movies <- movies[movies$imdbVotes > 10000 & movies$rottenVotes > 10000, ]
+
+# Keep only columns that we will be using later on
+cols_to_keep <- c("Title", "Year", "Runtime", "imdbRating", "imdbVotes", "rottenRating", "rottenVotes")
+movies <- movies[cols_to_keep]
+
+# Check out the result
+summary(movies)
+```
+
+Let's make one overall rating for movies (columns can be added using `$` notation): count the number of votes, create a weighted average of `rottenVotes` and `rottenRating`. Using the `dplyr` package, great for data manipulation.
+
+```{r}
+# install.packages(dplyr)
+library(dplyr)
+movies <- movies %>% 
+  mutate(Votes = imdbVotes + rottenVotes, 
+         Rating = (imdbVotes*imdbRating + rottenVotes*2*rottenRating)/Votes)
+```
+
+Let's do some first exploratory queries:
+
+```{r}
+# Top rated movies
+movies %>% select(Title, Rating) %>% arrange(desc(Rating)) %>% head(15)
+
+# Most voted movies
+movies %>% select(Title, Votes) %>% arrange(desc(Votes)) %>% head(15)
+```
+
+## Visualize
+
+How are ratings distributed?
+
+```{r}
+hist(movies$Rating, breaks = 25)
+```
+
+Compare rotten ratings to imdb ratings
+
+```{r}
+par(mfrow = c(1, 2))
+hist(movies$imdbRating, breaks = 25)
+hist(movies$rottenRating*2, breaks = 25)
+par(mfrow=c(1,1))
+```
+
+## Model
+
+Is there a correlation between a movie's runtime and its rating?
+
+```{r}
+cor(movies$Rating, movies$Runtime)
+```
+
+Let's use the `ggvis` package to plot a non-linear model to explain Rating based on Runtime:
+
+```{r}
+library(ggvis)
+movies %>% ggvis(~Runtime, ~Rating) %>% layer_points() %>% layer_smooths(se = TRUE)
+```
+
+## Report
+
+- Reproducible reporting: R Markdown
+- R code chunks inside a document
+- Uses Markdown syntax
+
+## Powerful packages
+
+- `dplyr` & `data.table` for data manipulation
+- `ggvis` for visualization
+- Free DataCamp Trial: www.datacamp.com/demo

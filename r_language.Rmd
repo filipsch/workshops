@@ -120,6 +120,7 @@ results
 results$scores
 mean(results$scores) # mean is a base R function
 ```
+
 ## R Packages
 
 R Packages: sets of R functions, data and compiled code to help solve a typical problem. Packages for visualization, high frequency trading, advanced statistical analyses, machine learning. Most of them are on [CRAN](http://cran.r-project.org/), the _Comprehensive R Archive Network_.
