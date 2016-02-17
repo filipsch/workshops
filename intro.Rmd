@@ -35,7 +35,7 @@ output: beamer_presentation
 
 - Install R: https://cran.rstudio.com/
 - Install RStudio: https://www.rstudio.com/products/rstudio/download/
-- Download zip: http://bit.ly/ulyissis
+- Download zip: [bit.ly/ulyssis](https://bit.ly/ulyssis)
 - Unzip
 - Open up RStudio
 - Set working directory to point to unzipped folder
