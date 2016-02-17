@@ -36,7 +36,7 @@ output: beamer_presentation
 - Install R: https://cran.rstudio.com/
 - Install RStudio: https://www.rstudio.com/products/rstudio/download/
 - Download zip: [bit.ly/ulyssis](https://bit.ly/ulyssis)
-- Source files on Git: https://github.com/filipsch/talk-r
+- Source files on Git: https://github.com/filipsch/r-workshop
 - Unzip
 - Open up RStudio
 - Set working directory to point to unzipped folder
