@@ -39,9 +39,8 @@ scores <- c(algebra = 12, physics = 17, management = 19, religion = 9)
 scores
 
 # subsetting
-scores[1]
-named_vec["el1"]
-named_vec[c("el1","el2")]
+scores[2]
+scores["physics"]
 ```
 
 ## Lists
@@ -52,14 +51,14 @@ named_vec[c("el1","el2")]
 - Subsetting with `[[ ]]`
 
 ```{r}
-summ <- list("algebra", 12, TRUE, "physics", 17, TRUE, "management", 19, TRUE, "relgion", 9, FALSE)
+summ <- list("algebra", 12, TRUE, "physics", 17, TRUE, "management", 19, TRUE, "religion", 9, FALSE)
 summ
 str(summ)
 
 summ2 <- list(list("algebra", 12, TRUE), 
               list("physics", 17, TRUE), 
               list("management", 19, TRUE), 
-              list("relgion", 9, FALSE))
+              list("religion", 9, FALSE))
 str(summ2)
 
 
@@ -128,7 +127,7 @@ R Packages: sets of R functions, data and compiled code to help solve a typical 
 ```{r error = TRUE}
 datatable(results)    # function the DT package
 
-install.packages("DR")
+install.packages("DT")
 library(DT)
 datatable(results)
 ```

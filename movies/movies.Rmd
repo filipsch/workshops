@@ -8,9 +8,11 @@ Typical actions you perform on your data:
 - Model
 - Report
 
+Goal of this case study: investigate movie ratings from IMdB and Rotten Tomatoes.
+
 ```{r}
 # Prepare R session
-setwd("~/courses/r-workshop")
+setwd("movies")
 ```
 
 ## Import
@@ -20,7 +22,7 @@ setwd("~/courses/r-workshop")
 
 ```{r}
 # read one part from database
-# install.packages(RSQLite)
+# install.packages("RSQLite")
 library(RSQLite)
 con <- dbConnect(SQLite(), "omdb.db")
 dbListTables(con)
@@ -49,7 +51,6 @@ summary(tomatoes)
 Use the `merge()` function to merge `tomatoes` and `omdb`: one data set.
 
 ```{r}
-# Do the merge
 movies <- merge(omdb, tomatoes, by="ID")
 
 # Check out the result
@@ -58,61 +59,103 @@ head(movies)
 summary(movies)
 ```
 
-There is still some cleaning needed!
+There is still some cleaning needed! Using the `dplyr` package, great for data manipulation.
 
 ```{r}
 # let's work with imdbRating and userRating
-names(movies)[names(movies) == "userRating"] <- "rottenRating"
-names(movies)[names(movies) == "userReviews"] <- "rottenVotes"
+library(dplyr)
 
-# Remove NA rating info, before it messes up our analyses
-row_misses_info <-  is.na(movies$imdbVotes) | is.na(movies$rottenVotes) | is.na(movies$imdbRating) | is.na(movies$rottenRating)
-summary(row_misses_info)
-movies <- movies[!row_misses_info, ]
+# 1. Rename some columns
+# 2. Remove observation with NA rating info
+# 3. Remove observations with less than 10000 votes
+# 4. Select columns of interest
+movies <- movies %>%
+  rename(rottenRating = userRating, rottenVotes = userReviews) %>%
+  filter(!is.na(imdbVotes), !is.na(rottenVotes), !is.na(imdbRating), !is.na(rottenRating)) %>%
+  filter(imdbVotes > 10000, rottenVotes > 10000) %>%
+  select(Title, Year, Runtime, imdbRating, imdbVotes, rottenRating, rottenVotes)
 
-# Remove movies that haven't got 10000 votes for both imdb and rotten tomatoes
-movies <- movies[movies$imdbVotes > 10000 & movies$rottenVotes > 10000, ]
+## base R version
 
-# Keep only columns that we will be using later on
-cols_to_keep <- c("Title", "Year", "Runtime", "imdbRating", "imdbVotes", "rottenRating", "rottenVotes")
-movies <- movies[cols_to_keep]
+# Step 1
+# names(movies)[names(movies) == "userRating"] <- "rottenRating"
+# names(movies)[names(movies) == "userReviews"] <- "rottenVotes"
+#
+# Step 2
+# row_misses_info <-  is.na(movies$imdbVotes) | is.na(movies$rottenVotes) | is.na(movies$imdbRating) | is.na(movies$rottenRating)
+# summary(row_misses_info)
+# movies <- movies[!row_misses_info, ]
+#
+# Step 3
+# movies <- movies[movies$imdbVotes > 10000 & movies$rottenVotes > 10000, ]
+#
+# Step 4
+# cols_to_keep <- c("Title", "Year", "Runtime", "imdbRating", "imdbVotes", "rottenRating", "rottenVotes")
+# movies <- movies[cols_to_keep]
 
 # Check out the result
 summary(movies)
 ```
 
-Let's make one overall rating for movies (columns can be added using `$` notation): count the number of votes, create a weighted average of `rottenVotes` and `rottenRating`. Using the `dplyr` package, great for data manipulation.
+Let's make one overall rating for movies (columns can be added using `$` notation): count the number of votes, create a weighted average of `rottenVotes` and `rottenRating`. 
 
 ```{r}
 # install.packages(dplyr)
-library(dplyr)
 movies <- movies %>% 
   mutate(Votes = imdbVotes + rottenVotes, 
-         Rating = (imdbVotes*imdbRating + rottenVotes*2*rottenRating)/Votes)
+         Rating = (imdbVotes * imdbRating + rottenVotes * 2 * rottenRating) / Votes)
 ```
 
-Let's do some first exploratory queries:
+Let's do some first exploratory queries.
+
+List of top-rated movies:
 
 ```{r}
-# Top rated movies
+# dplyr version
 movies %>% select(Title, Rating) %>% arrange(desc(Rating)) %>% head(15)
 
-# Most voted movies
+# Base R version
+head(movies[order(movies$Rating, decreasing = TRUE), c("Title", "Rating")], 15)
+```
+
+List of movies that got the most votes:
+
+```{r}
+# dplyr version
 movies %>% select(Title, Votes) %>% arrange(desc(Votes)) %>% head(15)
+
+# Base R version
+head(movies[order(movies$Rating, decreasing = TRUE), c("Title", "Votes")], 15)
 ```
 
 ## Visualize
 
+Plot the ratings against the year:
+
+```{r}
+# ggvis version
+library(ggvis)
+movies %>% ggvis(~Year, ~Rating) %>% layer_points()
+
+# base R version
+plot(movies$Year, movies$Rating)
+```
+
 How are ratings distributed?
 
 ```{r}
+# ggvis version, interactive!
+library(ggvis)
+movies %>% ggvis(~Rating) %>% layer_histograms(width = input_slider(0.1, 2, step = 0.1, value = 0.5, label = "Change binwidth"))
+
+# base R version
 hist(movies$Rating, breaks = 25)
 ```
 
 Compare rotten ratings to imdb ratings
 
 ```{r}
-par(mfrow = c(1, 2))
+par(mfrow = c(2, 1))
 hist(movies$imdbRating, breaks = 25)
 hist(movies$rottenRating*2, breaks = 25)
 par(mfrow=c(1,1))
@@ -124,6 +167,7 @@ Is there a correlation between a movie's runtime and its rating?
 
 ```{r}
 cor(movies$Rating, movies$Runtime)
+plot(movies$Rating, movies$Runtime)
 ```
 
 Let's use the `ggvis` package to plot a non-linear model to explain Rating based on Runtime:
