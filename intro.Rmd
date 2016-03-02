@@ -7,9 +7,8 @@ output: beamer_presentation
 ## About DataCamp
 
 - Online Data Science School
-- +300,000 registered users
-    + finance, marketing, technology, etc.
-- Video lessons and coding challenge
+- > 300,000 registered users
+- Video lessons and coding challenges
     + In-browser, self-paced
 - Instructors from Princeton, Harvard, Duke etc.
 - www.datacamp.com/demo
