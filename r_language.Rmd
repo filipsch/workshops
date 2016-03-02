@@ -136,7 +136,8 @@ datatable(results)
 ## Let's practice!
 
 - Create account on https://www.datacamp.com/
-- Head over to https://www.datacamp.com/courses/r-workshop and start the mini-course
+- Head over to https://www.datacamp.com/courses/r-workshop 
+- Click 'Start Course For Free'
 
 # Other programming concepts (extra)
 

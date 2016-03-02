@@ -29,7 +29,7 @@ dbListTables(con)
 omdb <- dbReadTable(con, "omdb")
 
 # read.csv is a built-in function
-tomatoes <- read.csv("rotten_tomatoes.csv", header = TRUE)
+tomatoes <- read.csv("rotten_tomatoes.csv")
 ```
 
 ## Explore
@@ -51,7 +51,7 @@ summary(tomatoes)
 Use the `merge()` function to merge `tomatoes` and `omdb`: one data set.
 
 ```{r}
-movies <- merge(omdb, tomatoes, by="ID")
+movies <- merge(omdb, tomatoes, by = "ID")
 
 # Check out the result
 names(movies)
@@ -104,6 +104,10 @@ Let's make one overall rating for movies (columns can be added using `$` notatio
 movies <- movies %>% 
   mutate(Votes = imdbVotes + rottenVotes, 
          Rating = (imdbVotes * imdbRating + rottenVotes * 2 * rottenRating) / Votes)
+
+## base R version
+# movies$Votes <- movies$imdbVotes + rottenVotes
+# movies$Rating <- (movies$imdbVotes * movies$imdbRating + movies$rottenVotes * 2 * movies$rottenRating) / movies$Votes
 ```
 
 Let's do some first exploratory queries.
@@ -114,8 +118,8 @@ List of top-rated movies:
 # dplyr version
 movies %>% select(Title, Rating) %>% arrange(desc(Rating)) %>% head(15)
 
-# Base R version
-head(movies[order(movies$Rating, decreasing = TRUE), c("Title", "Rating")], 15)
+## Base R version
+# head(movies[order(movies$Rating, decreasing = TRUE), c("Title", "Rating")], 15)
 ```
 
 List of movies that got the most votes:
@@ -124,8 +128,8 @@ List of movies that got the most votes:
 # dplyr version
 movies %>% select(Title, Votes) %>% arrange(desc(Votes)) %>% head(15)
 
-# Base R version
-head(movies[order(movies$Rating, decreasing = TRUE), c("Title", "Votes")], 15)
+## Base R version
+# head(movies[order(movies$Rating, decreasing = TRUE), c("Title", "Votes")], 15)
 ```
 
 ## Visualize
@@ -137,8 +141,8 @@ Plot the ratings against the year:
 library(ggvis)
 movies %>% ggvis(~Year, ~Rating) %>% layer_points()
 
-# base R version
-plot(movies$Year, movies$Rating)
+## base R version
+# plot(movies$Year, movies$Rating)
 ```
 
 How are ratings distributed?
@@ -148,8 +152,8 @@ How are ratings distributed?
 library(ggvis)
 movies %>% ggvis(~Rating) %>% layer_histograms(width = input_slider(0.1, 2, step = 0.1, value = 0.5, label = "Change binwidth"))
 
-# base R version
-hist(movies$Rating, breaks = 25)
+## base R version
+# hist(movies$Rating, breaks = 25)
 ```
 
 Compare rotten ratings to imdb ratings
@@ -179,12 +183,13 @@ movies %>% ggvis(~Runtime, ~Rating) %>% layer_points() %>% layer_smooths(se = TR
 
 ## Report
 
-- Reproducible reporting: R Markdown
-- R code chunks inside a document
-- Uses Markdown syntax
+- This file is an example of reproducible reporting!
+- R Markdown: R code and normal markdown text interwoven
+- Change R code: report changes accordingly
+- Simply hit Knit HTML
 
 ## Powerful packages
 
-- `dplyr` & `data.table` for data manipulation
+- `dplyr` for data manipulation
 - `ggvis` for visualization
 - Free DataCamp Trial: www.datacamp.com/demo
