@@ -133,6 +133,10 @@ library(DT)
 datatable(results)
 ```
 
+## Let's practice!
+
+- Create account on https://www.datacamp.com/
+- Head over to https://www.datacamp.com/courses/904 and start the mini-course
 
 # Other programming concepts (extra)
 
