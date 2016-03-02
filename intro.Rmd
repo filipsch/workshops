@@ -16,6 +16,7 @@ output: beamer_presentation
 ## About the Workshop
 
 - Basic intro to R
+- Practice with mini-course
 - Case Study
 - Questions? Yes please!
 
