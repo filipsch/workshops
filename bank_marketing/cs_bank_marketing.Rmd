@@ -18,7 +18,8 @@ Typical steps of an analysis in R:
 ## Import
 
 ```{r import}
-bank <- read.csv("~/Desktop/r_workshop_dm/cs_bank_marketing/bank-full.csv", sep = ";")
+setwd("~/courses/r-workshop/bank_marketing/")
+bank <- read.csv("bank-full.csv", sep = ";")
 ```
 
 ## Explore
@@ -36,7 +37,7 @@ hist(bank$age)
 library(dplyr)
 library(ggvis)
 
-bank %>% 
+bank %>%
   group_by(subscribed) %>% ggvis(~age, fill = ~subscribed) %>%
     layer_densities()
 
