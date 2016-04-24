@@ -1,0 +1,92 @@
+---
+title: "quivr workshop"
+author: "Filip Schouwenaars"
+date: "April 24, 2016"
+output: html_document
+---
+
+
+## Wat is R?
+
+- Language for Statistical Computing
+- Door statistici, voor statistici
+- Enorm grote community, zowel professioneel als academisch
+- Shift van 'base R' naar hadleyverse (Hadley Wickham)
+- R kan alle stappen van data analyse proces aan
+- Moet in main memory passen...
+- Veel interfacing naar C/C++ voor snelheid
+
+## Data analyse met R
+
+
+Data analyse proces: 5 stappen
+
+- Importing
+- Cleaning
+- Visualizing
+- Modeling
+- Reporting
+
+### Importing
+
+```{r}
+csv_path <- "https://s3.amazonaws.com/documents.datacamp.com/quivr/library_data.csv"
+library(readr)
+lib <- read_csv(csv_path)
+head(lib, 10)
+```
+
+### Cleaning
+
+De data bevat te veel info; `library_id` en `name` bevatten dezelfde info. Op zich is dit geen probleem. Logischer had geweest de `name` kolom niet te hebben en een eenvoudig 'vertaaltabelletje' te hebben, dat je met `dplyr::inner_join()` kan bijvoegen, wanneer gewenst. Kijken naar de structuur: alles lijkt al in de goede vorm te staan.
+
+```{r}
+str(lib)
+```
+
+Er zit een kolom in waar we niets mee zijn. Argument toevoegen aan de `read_csv()` kolom: `_` om over te slaan, `i` voor integer, `c` voor character, `T` for date time.
+
+```{r}
+lib <- read_csv(csv_path, col_types = c("_i_Tii"))
+str(lib)
+```
+
+### Visualize
+
+Om een eerste idee te krijgen van de data, kunnen we al eens aan het plotten gaan. Het bekendste plotting pakket in R is `ggplot2` [GitHub](www.github.com/hadley/ggplot2). De opvolger, `ggvis`, is nog actief in development.
+
+```{r}
+library(ggplot2)
+```
+
+Voor het gemak, even enkel met een subset werken, gemaakt met `dplyr`, ander pakket van Hadley Wickham (quite the rockstar)
+
+```{r}
+library(dplyr)
+lib_sub <- lib %>% filter(library_id == 1)
+```
+
+`ggplot2` staat voor grammar of graphics plotting, en volgt dus het grammar of graphic paradigma. Een plot bestaat uit verschillende modulaire lagen die je eenvoudig kan aanpassen. In de onderstaande plot worden een data laag, een aesthetics of mappings laag en een geometry laag gespecifieerd.
+
+```{r}
+ggplot(lib_sub, aes(x = date_created, y = occupancy)) + geom_line()
+```
+
+Zeer zigzag verloop, omdat elke nacht de bib sluit. We kunnen groeperen per dag, en dan het maximum per dag nemen.
+
+```{r}
+lib_sub %>%
+  group_by(day = as.Date(date_created)) %>%
+  summarize(max_day = max(occupancy)) %>%
+  ggplot(aes(x = day, y = max_day)) + geom_line()
+```
+
+Duidelijke drop in de lesvrije week en het grote verlof; duidelijke piek tijdens de twee blokperiodes.
+
+### Time Series Modeling
+
+Je zou nu time series modellering kunnen gebruiken, neurale netwerken etc, om het verloop van de bibliotheek te voorspellen. Zelf geen ervaring mee.
+
+### Rapporteren
+
+Mocht je gelijkaardige analyses willen uitvoeren voor Quivr data en een documentje willen maken: werk in R Markdown. Gewoonweg op Knit HTML drukken en je bouwt een web pagina met al je werk. Met opties in de R code chunks, kan je controleren wat er al dan niet getoond wordt in je verslag.

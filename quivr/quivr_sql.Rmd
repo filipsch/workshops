@@ -1,0 +1,77 @@
+---
+title: "Interfacen met SQL vanuit R"
+author: "Filip Schouwenaars"
+date: "April 24, 2016"
+output: html_document
+---
+
+Met het `dplyr` pakket is het eenvoudig om abstractie te maken van de techniciteiten van werken met SQL data. Als voorbeeld ga ik vanuit R enkele queries uitvoeren op DataCamp's mySQL database.
+
+```{r}
+library(yaml)
+db_config <- yaml.load_file("~/workspace/data/db_config.yml")
+str(db_config)
+
+library(dplyr)
+db <- do.call(src_mysql, db_config)
+```
+
+## DataCamp gebruikers doorheen de tijd
+
+`dplyr` syntax in R wordt automatisch omgevormd naar SQL query taal, en het leeuwendeel van data munging wordt server-side uitgevoerd; enkel het resultaat moet geimporteerd worden in R: efficiënt! Je kan het resultaat meteen in `ggplot2` pipen om in een commando van database naar plot te gaan.
+
+```{r}
+# eerst 'brug' bouwen: users
+users <- tbl(db, "users")
+glimpse(users)
+
+library(ggplot2)
+users %>%
+  select(id, created_at) %>%
+  group_by(date = substr(created_at, 1, 10)) %>%
+  summarise(daily = n()) %>%
+  collect() %>% # importeer in R
+  mutate(date = as.Date(date), cum_daily = cumsum(daily)) %>%
+  ggplot(aes(x = date, y = cum_daily)) + geom_area()
+```
+
+What's up with Metabase? Werkte niet voor DataCamp's databases...
+
+## Completion van lessen doorheen de tijd
+
+```{r}
+course_ids <- c(58, 672, 735, 799)
+user_courses <- tbl(db, "user_courses")
+glimpse(user_courses)
+
+for (crs_id in course_ids) {
+  plt <- user_courses %>%
+    filter(course_id == crs_id, completed == 1) %>%
+    group_by(date = substr(completed_at, 1, 10)) %>%
+    summarise(daily = n()) %>%
+    collect() %>%
+    mutate(date = as.Date(date), cum_daily = cumsum(daily)) %>%
+    ggplot(aes(x = date, y = cum_daily)) + 
+      geom_area() +
+      ggtitle(sprintf("Completion figures for %s", crs_id))
+  print(plt)
+}
+
+# courses <- data.frame(id = c(58, 672, 735, 799), 
+#                       name = c("Introduction to R", "Intermediate R", "Introduction to Python", "Intermediate Python"))
+# 
+# user_courses <- tbl(db, "user_courses")
+# for (i in 1:nrow(courses)) {
+#   plt <- user_courses %>%
+#     filter(course_id == courses[i, "id"], completed == 1) %>%
+#     group_by(date = substr(completed_at, 1, 10)) %>%
+#     summarise(daily = n()) %>%
+#     collect() %>%
+#     mutate(date = as.Date(date), cum_daily = cumsum(daily)) %>%
+#     ggplot(aes(x = date, y = cum_daily)) + 
+#       geom_area() +
+#       ggtitle(sprintf("Completion figures: %s", courses[i, "name"]))
+#   print(plt)
+# }
+```
+
