@@ -1,0 +1,50 @@
+---
+title: "R 2.0: Recap and Introduction"
+author: "Filip Schouwenaars"
+date: "April 24, 2016"
+output: beamer_presentation
+---
+
+## About
+
+- Background in EE and AI
+- Online Data Science School
+- > 300,000 registered users
+- Video lessons and coding challenges
+- Instructors from Princeton, Harvard, Duke etc.
+- www.datacamp.com/demo
+
+## Previous workshop
+
+- Basic introduction to R
+- Getting to know RStudio
+- Different data structures
+- Basics of plotting
+
+Key takeaways:
+
+- Command line (reproducible) versus point-and-click
+- Huge online community: thousands of packages on CRAN
+- Easy to get results fast
+
+## This workshop
+
+- Part 1: Warmup with some exercises on DataCamp
+- Part 2: Case study on libraries
+- Part 3: Case study on movie ratings
+- Questions? Yes please!
+
+## Part 1: Warmup
+
+- Go to https://www.datacamp.com
+- Log in / create account
+- https://www.datacamp.com/courses/r-workshop
+- I'll walk around
+
+## Part 2 & Part 3: Set up your system
+
+- Download zip at bit.ly/remergent
+- Open up RStudio
+- Move to unzipped folder: "set as working directory"
+- Open up .Rmd files to follow along.
+

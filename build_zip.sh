@@ -1,8 +1,11 @@
 # Convert intro.Rmd to PDF
-R -e 'library(rmarkdown); render("intro.Rmd")'
+R -e 'library(rmarkdown); render("R2.0_intro.Rmd")'
 
 # Zip all files
-zip -r ulyssis.zip zip intro.Rmd intro.pdf r_language.Rmd movies/movies.Rmd movies/omdb.db movies/rotten_tomatoes.csv
+zip -r emergent.zip R2.0_intro.Rmd R2.0_intro.pdf cs_movies/movies.Rmd cs_movies/omdb.db cs_movies/rotten_tomatoes.csv cs_libraries/cs_libraries.Rmd
 
 # Put files on S3
-s3cmd put --acl-public ulyssis.zip s3://documents.datacamp.com/ulyssis/
+s3cmd put --acl-public emergent.zip s3://documents.datacamp.com/emergent/
+
+# clean up local zip
+rm emergent.zip

@@ -1,0 +1,69 @@
+---
+title: "Analyzing library data"
+author: "Filip Schouwenaars"
+date: "April 24, 2016"
+output: pdf_document
+---
+
+Let's discuss the occupation of Leuven's libraries.
+
+## Importing the data
+
+```{r}
+# csv_path <- "https://s3.amazonaws.com/documents.datacamp.com/quivr/library_data.csv"
+csv_path <- "~/Downloads/library_data.csv"
+
+library(readr)
+lib <- read_csv(csv_path)
+str(lib)
+```
+
+## Clean the data
+
+It seems that there is one column that doesn't mean anything; let's do some cleaning to remove it. Also, we'll convert the `date_created` column to an actual date.
+
+```{r}
+library(dplyr)
+lib_clean <- lib %>% 
+  select(-1) %>%
+  mutate(date = as.Date(date_created))
+
+# head(lib_clean, 10)
+
+library(knitr)
+kable(head(lib_clean, 10))
+```
+
+## Explore and visualize the data
+
+What was the highest occupancy for each library?
+
+```{r}
+lib %>%
+  group_by(name) %>%
+  summarise(max_occ = max(occupancy)) %>%
+  arrange(desc(max_occ))
+
+## %>% kable
+```
+
+A plot of AGORA occupation over time:
+
+```{r}
+library(ggplot2)
+lib_clean %>%
+  filter(library_id == 1) %>%
+  group_by(date) %>%
+  summarise(avg_occ = mean(occupancy)) %>%
+  ggplot(aes(x = date, y = avg_occ)) + geom_line()
+```
+
+Clear peaks towards the exam periods, and drops during the holidays.
+
+## Model the data
+
+We could do time series modeling to predict the occupancy of the libraries based on historical data. Skipped for now ;-)
+
+## Report the data
+
+This is a R Markdown document, which is fully reproducible. Simply hit 'Knit HTML' inside RStudio, and a html document will be built. Very easily, you can also turn it into \LaTeX backed PDF documents. You can update the options inside the R chunks to display or hide R code, output, plots, results, etc. You can use `kable()`, which is baked into R Markdown, or packages like `pander` to create nice looking tables.
