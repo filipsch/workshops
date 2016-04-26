@@ -1,10 +1,17 @@
+---
+title: "Analyzing movie data"
+author: "Filip Schouwenaars"
+date: "April 26, 2016"
+output: html_document
+---
+
 # Case study
 
 Typical actions you perform on your data:
 
 - Import
-- Explore
-- Visualize
+- Clean
+- Explore & Visualize
 - Model
 - Report
 
@@ -20,15 +27,19 @@ setwd("movies")
 - R can deal with many sources, online and offline
 - Dedicated application-specific packages (DBs, excel, text files)
 
+We read the IMdB data from an SQLite database:
+
 ```{r}
-# read one part from database
 # install.packages("RSQLite")
 library(RSQLite)
 con <- dbConnect(SQLite(), "omdb.db")
 dbListTables(con)
 omdb <- dbReadTable(con, "omdb")
+```
 
-# read.csv is a built-in function
+The rotten tomatoes data comes as a CSV, that we can read in with `read.csv()`.
+
+```{r}
 tomatoes <- read.csv("rotten_tomatoes.csv")
 ```
 
@@ -48,7 +59,7 @@ tail(tomatoes)
 summary(tomatoes)
 ```
 
-Use the `merge()` function to merge `tomatoes` and `omdb`: one data set.
+Use the `merge()` function to merge `tomatoes` and `omdb`: one data set. Looking at the names, they have the `ID` column in common.
 
 ```{r}
 movies <- merge(omdb, tomatoes, by = "ID")
@@ -59,77 +70,61 @@ head(movies)
 summary(movies)
 ```
 
+## Clean
+
 There is still some cleaning needed! Using the `dplyr` package, great for data manipulation.
+
+1. Rename some columns
+2. Remove observation with NA rating info
+3. Remove observations with less than 10000 votes
+4. Select columns of interest
 
 ```{r}
 # let's work with imdbRating and userRating
 library(dplyr)
 
-# 1. Rename some columns
-# 2. Remove observation with NA rating info
-# 3. Remove observations with less than 10000 votes
-# 4. Select columns of interest
-movies <- movies %>%
+movies_clean <- movies %>%
   rename(rottenRating = userRating, rottenVotes = userReviews) %>%
   filter(!is.na(imdbVotes), !is.na(rottenVotes), !is.na(imdbRating), !is.na(rottenRating)) %>%
   filter(imdbVotes > 10000, rottenVotes > 10000) %>%
   select(Title, Year, Runtime, imdbRating, imdbVotes, rottenRating, rottenVotes)
-
-## base R version
-
-# Step 1
-# names(movies)[names(movies) == "userRating"] <- "rottenRating"
-# names(movies)[names(movies) == "userReviews"] <- "rottenVotes"
-#
-# Step 2
-# row_misses_info <-  is.na(movies$imdbVotes) | is.na(movies$rottenVotes) | is.na(movies$imdbRating) | is.na(movies$rottenRating)
-# summary(row_misses_info)
-# movies <- movies[!row_misses_info, ]
-#
-# Step 3
-# movies <- movies[movies$imdbVotes > 10000 & movies$rottenVotes > 10000, ]
-#
-# Step 4
-# cols_to_keep <- c("Title", "Year", "Runtime", "imdbRating", "imdbVotes", "rottenRating", "rottenVotes")
-# movies <- movies[cols_to_keep]
-
-# Check out the result
-summary(movies)
 ```
 
-Let's make one overall rating for movies (columns can be added using `$` notation): count the number of votes, create a weighted average of `rottenVotes` and `rottenRating`. 
+If we have a look at the summary, it looks much better now!
 
 ```{r}
-# install.packages(dplyr)
-movies <- movies %>% 
+summary(movies_clean)
+```
+
+Let's also make one overall rating for movies (columns can be added using `$` notation): count the number of votes, create a weighted average of `rottenVotes` and `rottenRating`. IMdB rating are /10, Rotten Tomatoes votes are /5, take this into account!
+
+```{r}
+movies_overall <- movies_clean %>% 
   mutate(Votes = imdbVotes + rottenVotes, 
          Rating = (imdbVotes * imdbRating + rottenVotes * 2 * rottenRating) / Votes)
-
-## base R version
-# movies$Votes <- movies$imdbVotes + rottenVotes
-# movies$Rating <- (movies$imdbVotes * movies$imdbRating + movies$rottenVotes * 2 * movies$rottenRating) / movies$Votes
 ```
+
+
+## Explore
 
 Let's do some first exploratory queries.
 
 List of top-rated movies:
 
 ```{r}
-# dplyr version
-movies %>% select(Title, Rating) %>% arrange(desc(Rating)) %>% head(15)
-
-## Base R version
-# head(movies[order(movies$Rating, decreasing = TRUE), c("Title", "Rating")], 15)
+movies_overall %>% 
+  select(Title, Rating) %>% 
+  arrange(desc(Rating)) %>% 
+  head(15)
 ```
 
 List of movies that got the most votes:
 
 ```{r}
-# dplyr version
-movies %>% select(Title, Votes) %>% arrange(desc(Votes)) %>% head(15)
-
-## Base R version
-# head(movies[order(movies$Rating, decreasing = TRUE), c("Title", "Votes")], 15)
+movies_overall %>% 
+  select(Title, Votes) %>% 
+  arrange(desc(Votes)) %>% 
+  head(15)
 ```
 
 ## Visualize
@@ -137,32 +132,27 @@ movies %>% select(Title, Votes) %>% arrange(desc(Votes)) %>% head(15)
 Plot the ratings against the year:
 
 ```{r}
-# ggvis version
 library(ggvis)
-movies %>% ggvis(~Year, ~Rating) %>% layer_points()
-
-## base R version
-# plot(movies$Year, movies$Rating)
+movies_overall %>% 
+  ggvis(~Year, ~Rating) %>% 
+  layer_points()
 ```
 
 How are ratings distributed?
 
 ```{r}
-# ggvis version, interactive!
-library(ggvis)
-movies %>% ggvis(~Rating) %>% layer_histograms(width = input_slider(0.1, 2, step = 0.1, value = 0.5, label = "Change binwidth"))
-
-## base R version
-# hist(movies$Rating, breaks = 25)
+movies_overall %>% 
+  ggvis(~Rating) %>% 
+  layer_histograms(width = input_slider(0.1, 2, step = 0.1, value = 0.5, label = "Change binwidth"))
 ```
 
 Compare rotten ratings to imdb ratings
 
 ```{r}
 par(mfrow = c(2, 1))
-hist(movies$imdbRating, breaks = 25)
-hist(movies$rottenRating*2, breaks = 25)
-par(mfrow=c(1,1))
+hist(movies_overall$imdbRating, breaks = 25)
+hist(movies_overall$rottenRating*2, breaks = 25)
+par(mfrow = c(1,1))
 ```
 
 ## Model
@@ -170,15 +160,18 @@ par(mfrow=c(1,1))
 Is there a correlation between a movie's runtime and its rating?
 
 ```{r}
-cor(movies$Rating, movies$Runtime)
-plot(movies$Rating, movies$Runtime)
+cor(movies_overall$Rating, movies_overall$Runtime)
+plot(movies_overall$Rating, movies_overall$Runtime)
 ```
 
 Let's use the `ggvis` package to plot a non-linear model to explain Rating based on Runtime:
 
 ```{r}
 library(ggvis)
-movies %>% ggvis(~Runtime, ~Rating) %>% layer_points() %>% layer_smooths(se = TRUE)
+movies_overall %>% 
+  ggvis(~Runtime, ~Rating) %>% 
+  layer_points() %>% 
+  layer_smooths(se = TRUE)
 ```
 
 ## Report
@@ -190,6 +183,5 @@ movies %>% ggvis(~Runtime, ~Rating) %>% layer_points() %>% layer_smooths(se = TR
 
 ## Powerful packages
 
-- `dplyr` for data manipulation
-- `ggvis` for visualization
-- Free DataCamp Trial: www.datacamp.com/demo
+- `dplyr` for data manipulation.
+- `ggvis` for visualization.

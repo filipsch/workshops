@@ -32,6 +32,7 @@ Key takeaways:
 - Part 1: Warmup with some exercises on DataCamp
 - Part 2: Case study on libraries
 - Part 3: Case study on movie ratings
+- Large part = importing, cleaning and exploring!
 - Questions? Yes please!
 
 ## Part 1: Warmup

@@ -46,19 +46,25 @@ lib_clean %>%
   summarise(max_occ = max(occupancy)) %>%
   arrange(desc(max_occ))
 
-## %>% kable
+# %>% kable
 ```
 
-It could be interesting to see the daily average occupation of the AGORA learning center over time:
+It could be interesting to see the daily average occupation of the AGORA learning center over time. First let's create a data frame with the correct information:
 
 ```{r}
 agora_daily <- lib_clean %>%
   filter(library_id == 1) %>%
   group_by(date) %>%
   summarise(avg_occ = mean(occupancy))
+```
 
+Now we can use `ggplot2`'s grammar of graphics to create a pretty graph
+
+```{r}
 library(ggplot2)
-ggplot(agora_daily, aes(x = date, y = avg_occ)) + geom_line()
+ggplot(agora_daily, aes(x = date, y = avg_occ)) + 
+  geom_line(col = "red") + 
+  ggtitle("Agora occupancy over time")
 ```
 
 Clear peaks towards the exam periods, and drops during the holidays.
