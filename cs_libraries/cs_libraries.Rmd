@@ -1,7 +1,7 @@
 ---
 title: "Analyzing library data"
 author: "Filip Schouwenaars"
-date: "April 24, 2016"
+date: "April 26, 2016"
 output: pdf_document
 ---
 
@@ -15,7 +15,9 @@ csv_path <- "~/Downloads/library_data.csv"
 
 library(readr)
 lib <- read_csv(csv_path)
-str(lib)
+
+library(dplyr)
+glimpse(lib)
 ```
 
 ## Clean the data
@@ -28,10 +30,10 @@ lib_clean <- lib %>%
   select(-1) %>%
   mutate(date = as.Date(date_created))
 
-# head(lib_clean, 10)
+head(lib_clean, 10)
 
-library(knitr)
-kable(head(lib_clean, 10))
+# library(knitr)
+# kable(head(lib_clean, 10))
 ```
 
 ## Explore and visualize the data
@@ -39,7 +41,7 @@ kable(head(lib_clean, 10))
 What was the highest occupancy for each library?
 
 ```{r}
-lib %>%
+lib_clean %>%
   group_by(name) %>%
   summarise(max_occ = max(occupancy)) %>%
   arrange(desc(max_occ))
@@ -47,15 +49,16 @@ lib %>%
 ## %>% kable
 ```
 
-A plot of AGORA occupation over time:
+It could be interesting to see the daily average occupation of the AGORA learning center over time:
 
 ```{r}
-library(ggplot2)
-lib_clean %>%
+agora_daily <- lib_clean %>%
   filter(library_id == 1) %>%
   group_by(date) %>%
-  summarise(avg_occ = mean(occupancy)) %>%
-  ggplot(aes(x = date, y = avg_occ)) + geom_line()
+  summarise(avg_occ = mean(occupancy))
+
+library(ggplot2)
+ggplot(agora_daily, aes(x = date, y = avg_occ)) + geom_line()
 ```
 
 Clear peaks towards the exam periods, and drops during the holidays.
