@@ -47,5 +47,6 @@ Key takeaways:
 - Download zip at bit.ly/remergent
 - Open up RStudio
 - Move to unzipped folder: "set as working directory"
+- Install packages: dplyr, ggplot2, ggvis
 - Open up .Rmd files to follow along.
 

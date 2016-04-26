@@ -19,7 +19,7 @@ Goal of this case study: investigate movie ratings from IMdB and Rotten Tomatoes
 
 ```{r}
 # Prepare R session
-setwd("movies")
+# setwd("cs_movies")
 ```
 
 ## Import
@@ -72,7 +72,7 @@ summary(movies)
 
 ## Clean
 
-There is still some cleaning needed! Using the `dplyr` package, great for data manipulation.
+There is still some cleaning needed!
 
 1. Rename some columns
 2. Remove observation with NA rating info
@@ -80,9 +80,7 @@ There is still some cleaning needed! Using the `dplyr` package, great for data m
 4. Select columns of interest
 
 ```{r}
-# let's work with imdbRating and userRating
 library(dplyr)
-
 movies_clean <- movies %>%
   rename(rottenRating = userRating, rottenVotes = userReviews) %>%
   filter(!is.na(imdbVotes), !is.na(rottenVotes), !is.na(imdbRating), !is.na(rottenRating)) %>%
@@ -170,7 +168,7 @@ Let's use the `ggvis` package to plot a non-linear model to explain Rating based
 library(ggvis)
 movies_overall %>% 
   ggvis(~Runtime, ~Rating) %>% 
-  layer_points() %>% 
+  layer_points(opacity := 0.1) %>% 
   layer_smooths(se = TRUE)
 ```
 
@@ -180,8 +178,3 @@ movies_overall %>%
 - R Markdown: R code and normal markdown text interwoven
 - Change R code: report changes accordingly
 - Simply hit Knit HTML
-
-## Powerful packages
-
-- `dplyr` for data manipulation.
-- `ggvis` for visualization.

@@ -3,7 +3,6 @@
 movies_clean <- movies
 
 # Step 1
-
 names(movies_clean)[names(movies_clean) == "userRating"] <- "rottenRating"
 names(movies_clean)[names(movies_clean) == "userReviews"] <- "rottenVotes"
 
@@ -18,6 +17,7 @@ movies_clean <- movies_clean[movies_clean$imdbVotes > 10000 & movies_clean$rotte
 # Step 4
 cols_to_keep <- c("Title", "Year", "Runtime", "imdbRating", "imdbVotes", "rottenRating", "rottenVotes")
 movies_clean <- movies_clean[cols_to_keep]
+
 
 movies_overall <- movies_clean
 movies_overall$Votes <- movies_overall$imdbVotes + rottenVotes
