@@ -5,6 +5,10 @@ date: "April 24, 2016"
 output: html_document
 ---
 
+```{r}
+library(knitr)
+knitr_opts$set(echo = FALSE)
+```
 
 ## Wat is R?
 
@@ -18,7 +22,6 @@ output: html_document
 
 ## Data analyse met R
 
-
 Data analyse proces: 5 stappen
 
 - Importing
@@ -29,8 +32,11 @@ Data analyse proces: 5 stappen
 
 ### Importing
 
-```{r}
+We hebben de data geimporteerd.
+
+```{r, include = FALSE}
 csv_path <- "https://s3.amazonaws.com/documents.datacamp.com/quivr/library_data.csv"
+csv_path <- "~/Downloads/library_data.csv"
 library(readr)
 lib <- read_csv(csv_path)
 head(lib, 10)
@@ -40,7 +46,7 @@ head(lib, 10)
 
 De data bevat te veel info; `library_id` en `name` bevatten dezelfde info. Op zich is dit geen probleem. Logischer had geweest de `name` kolom niet te hebben en een eenvoudig 'vertaaltabelletje' te hebben, dat je met `dplyr::inner_join()` kan bijvoegen, wanneer gewenst. Kijken naar de structuur: alles lijkt al in de goede vorm te staan.
 
-```{r}
+```{r, include = FALSE, eval = FALSE}
 str(lib)
 ```
 
@@ -48,7 +54,8 @@ Er zit een kolom in waar we niets mee zijn. Argument toevoegen aan de `read_csv(
 
 ```{r}
 lib <- read_csv(csv_path, col_types = c("_i_Tii"))
-str(lib)
+library(knitr)
+kable(head(lib, 10))
 ```
 
 ### Visualize
@@ -74,11 +81,12 @@ ggplot(lib_sub, aes(x = date_created, y = occupancy)) + geom_line()
 
 Zeer zigzag verloop, omdat elke nacht de bib sluit. We kunnen groeperen per dag, en dan het maximum per dag nemen.
 
-```{r}
-lib_sub %>%
-  group_by(day = as.Date(date_created)) %>%
+```{r, echo = FALSE}
+lib %>%
+  group_by(library_id, day = as.Date(date_created)) %>%
   summarize(max_day = max(occupancy)) %>%
-  ggplot(aes(x = day, y = max_day)) + geom_line()
+  filter(library_id %in% c(1, 2, 3, 4)) %>%
+  ggplot(aes(x = day, y = max_day)) + facet_grid( ~ library_id) + geom_line()
 ```
 
 Duidelijke drop in de lesvrije week en het grote verlof; duidelijke piek tijdens de twee blokperiodes.

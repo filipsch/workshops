@@ -23,7 +23,6 @@ db <- do.call(src_mysql, db_config)
 ```{r}
 # eerst 'brug' bouwen: users
 users <- tbl(db, "users")
-glimpse(users)
 
 library(ggplot2)
 users %>%
@@ -42,7 +41,6 @@ What's up with Metabase? Werkte niet voor DataCamp's databases...
 ```{r}
 course_ids <- c(58, 672, 735, 799)
 user_courses <- tbl(db, "user_courses")
-glimpse(user_courses)
 
 for (crs_id in course_ids) {
   plt <- user_courses %>%
