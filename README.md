@@ -1,5 +1,9 @@
 # Workshops in R
 
+## April 28, 2016 - Quivr
+
+Case study with library data, going through the enitre process of data analysis. Deeper dive into building business dashboards by combining knitr with automated jobs.
+
 ## April 26, 2016 - Emergent: intermediate R
 
 Emergent's first R workshop focussed on the basics of R, such as data structure, descriptive statistics and simple plots. In this follow-up workshop, organized by DataCamp, we'll take things one step further. In a case study format, we'll go through the typical data analysis process, going from importing data to cleaning data over building models, to finally visualizing and reporting your findings.
