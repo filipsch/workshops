@@ -1,4 +1,8 @@
-# Workshops in R
+# Workshops and talks about R
+
+## June 30, 2016 - UseR 2016
+
+Presentation of the [tutorial package](https://github.com/datacamp/tutorial), a wrapper around the amazing DataCamp Light project to make your reports interactive playgrounds. The slides and other documents can be found [here](https://github.com/filipsch/user2016-tutorial).
 
 ## April 28, 2016 - Quivr
 
