@@ -1,0 +1,125 @@
+---
+title: "Plotting unemployment in Germany"
+author: "Filip Schouwenaars"
+date: "April 26, 2016"
+output: html_document
+---
+
+```{r}
+setwd("~/workspace/r-workshop/cs_maps/")
+```
+
+Shapefiles can be used to describe points, polylines or polygons - here you'll focus on polygons for drawing maps.
+
+A single shapefile actually consists of several files, each describing a specific aspect of the overall geometry. The three core file types are:
+
+- `.shp`: the shape, the feature geometry itself.
+- `.shx`: the shape index, a positional index.
+- `.dbf`: the attribute, attributes for each shape arranged in columns.
+
+The prefix name of these files must be consistent and they must be kept in the same directory. The files you'll use are for Germany, and all begin with `DEU`. The suffix specifies the level of organization: 
+
+- `DEU_adm0` is the administrative (political) boundaries of the entire country
+- `DEU_adm1` is the administrative boundaries for each of the 16 states
+
+```{r}
+library(rgdal) # for getting shapefiles
+library(ggplot2) # for 'fortifying'
+library(ggmap); library(ggthemes) # for themes
+
+# country level
+germany_raw <- readOGR(dsn = "germany", layer = "DEU_adm0")
+class(germany_raw)
+fortify # S3 function
+ggplot2:::fortify.SpatialPolygonsDataFrame
+germany <- ggplot2:::fortify.SpatialPolygonsDataFrame(germany_raw)
+str(germany)
+ggplot(germany, aes(x = long, y = lat, group = group)) +
+    geom_polygon(fill = "blue", col = "white") +
+    coord_map() + 
+    theme_nothing()
+
+# state level (bundes)
+bundes_raw <- readOGR(dsn = "germany", layer = "DEU_adm1")
+class(bundes_raw)
+bundes <- fortify(bundes_raw)
+str(bundes)
+ggplot(bundes, aes(x = long, y = lat, group = group)) +
+    geom_polygon(fill = "blue", col = "white") +
+    coord_map() + 
+    theme_nothing()
+
+## Color according to unemployment
+
+# Add names again
+bundes$state <- factor(as.numeric(bundes$id))
+levels(bundes$state) <- bundes_raw$NAME_1
+
+# Import unemployment data
+unemp <- read.delim("germany_unemployment.txt")
+
+# merge bundes and unemp
+bundes_unemp <- merge(bundes, unemp)
+
+# Choropleth
+ggplot(bundes_unemp, aes(x = long, y = lat, group = group, fill = unemployment)) +
+  geom_polygon() +
+  coord_map() +
+  theme_map()
+
+# Get coordinates of major cities, with population estimates
+cities <- read.csv("german_cities.csv")
+ggplot(bundes_unemp, aes(x = long, y = lat, fill = unemployment)) +
+  geom_polygon(aes(group = group)) +
+  geom_point(data = cities, aes(size = Pop_est),
+             col = "red", shape = 16, alpha = 0.6) +
+  coord_map() +
+  theme_map()
+
+```
+
+How the german cities data frame came about:
+
+```{r}
+write("
+// scrape_techstars.js
+
+var webPage = require('webpage');
+var page = webPage.create();
+
+var fs = require('fs');
+var path = 'germancities.html'
+
+page.open('http://www.citymayors.com/gratis/german_topcities.html', function (status) {
+  var content = page.content;
+  fs.write(path,content,'w')
+  phantom.exit();
+});
+", file = "scrape_web.js")
+system("./phantomjs scrape_web.js")
+
+lines <- read_html("germancities.html", encoding = ) %>% guess_encoding()
+  html_nodes("table tbody tr td table tbody tr") %>% html_text()
+
+# drop last
+splitup <- strsplit(lines[-length(lines)], "\t|\n")
+clean <- lapply(splitup, function(x) gsub("^\\s+|\\s+$", "", x[x != ""]))
+df <- as.data.frame(do.call(rbind, clean[-1]), stringsAsFactors = FALSE)
+names(df) <- clean[[1]]
+df$Rank <- as.numeric(df$Rank)
+df$Population <- as.numeric(gsub(",", "", df$Population))
+class(batches)
+df$Rank <- NULL
+xy <- ggmap::geocode(location = df$City)
+xy$location <- df$City
+ultra_df <- merge(df, xy)
+write.csv(ultra_df, file = "german_cities.csv")
+```
+
+## About this report
+
+This is a R Markdown document, which is fully reproducible. Simply hit 'Knit HTML' inside RStudio, and a html document will be built. Very easily, you can also turn it into \LaTeX backed PDF documents. You can update the options inside the R chunks to display or hide R code, output, plots, results, etc. You can use `kable()`, which is baked into R Markdown, or packages like `pander` to create good-looking tables.
+
+## References
+
+These scripts are based on work that Rick Scavetta did for DataCamp, in his [third course on ggplot2](https://www.datacamp.com/courses/862)

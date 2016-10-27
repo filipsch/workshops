@@ -1,0 +1,17 @@
+state	unemployment
+Bayern	3.7
+Baden-Württemberg	4.0
+Rheinland-Pfalz	5.4
+Hessen	5.8
+Niedersachsen	6.5
+Schleswig-Holstein	6.7
+Hamburg	7.3
+Saarland	7.4
+Thüringen	8.3
+Nordrhein-Westfalen	8.3
+Sachsen	9.4
+Brandenburg	9.8
+Bremen	11.1
+Sachsen-Anhalt	11.2
+Mecklenburg-Vorpommern	11.4
+Berlin	11.8
