@@ -1,101 +1,101 @@
-"","City","State","Population"
-"1","Berlin","Berlin",3275000
-"2","Hamburg","Hamburg",1686100
-"3","MÃ¼nchen","Bavaria",1185400
-"4","KÃ¶ln","Northrhine-Westfalia",965300
-"5","Frankfurt","Hessen",648000
-"6","Essen","Northrhine-Westfalia",588800
-"7","Dortmund","Northrhine-Westfalia",587600
-"8","Stuttgart","Baden-WÃ¼rttemberg",581100
-"9","DÃ¼sseldorf","Northrhine-Westfalia",568900
-"10","Bremen","Bremen",527900
-"11","Hannover","Lower Saxony",516300
-"12","Duisburg","Northrhine-Westfalia",513400
-"13","NÃ¼rnberg","Bavaria",486700
-"14","Leipzig","Saxony",486100
-"15","Dresden","Saxony",473300
-"16","Bochum","Northrhine-Westfalia",388100
-"17","Wuppertal","Northrhine-Westfalia",365400
-"18","Bielefeld","Northrhine-Westfalia",320900
-"19","Bonn","Northrhine-Westfalia",307500
-"20","Mannheim","Baden-WÃ¼rttemberg",306100
-"21","Karlsruhe","Baden-WÃ¼rttemberg",279600
-"22","Gelsenkirchen","Northrhine-Westfalia",276200
-"23","Wiesbaden","Hessen",269200
-"24","MÃ¼nster","Northrhine-Westfalia",265900
-"25","MÃ¶nchengladbach","Northrhine-Westfalia",264400
-"26","Chemnitz","Saxony",255600
-"27","Augsburg","Bavaria",253800
-"28","Braunschweig","Lower Saxony",243700
-"29","Aachen","Northrhine-Westfalia",241300
-"30","Krefeld","Northrhine-Westfalia",238000
-"31","Halle","Saxony-Anhalt",237400
-"32","Kiel","Schleswig-Holstein",229900
-"33","Magdeburg","Saxony-Anhalt",224100
-"34","Oberhausen","Northrhine-Westfalia",221700
-"35","LÃ¼beck","Schleswig-Holstein",213400
-"36","Freiburg","Baden-WÃ¼rttemberg",206300
-"37","Hagen","Northrhine-Westfalia",201700
-"38","Erfurt","Thuringia",195000
-"39","Kassel","Hessen",193500
-"40","Rostock","Mecklenburg-Vorpommern",192100
-"41","Mainz","Rhineland-Palatinate",186700
-"42","Hamm","Northrhine-Westfalia",180300
-"43","SaarbrÃ¼cken","Saarland",180000
-"44","Herne","Northrhine-Westfalia",174200
-"45","MÃ¼lheim","Northrhine-Westfalia",173000
-"46","Solingen","Northrhine-Westfalia",164500
-"47","OsnabrÃ¼ck","Lower Saxony",164000
-"48","Ludwigshafen","Rhineland-Palatinate",162000
-"49","Leverkusen","Northrhine-Westfalia",161700
-"50","Oldenburg","Lower Saxony",157600
-"51","Neuss","Northrhine-Westfalia",150400
-"52","Paderborn","Northrhine-Westfalia",141200
-"53","Heidelberg","Baden-WÃ¼rttemberg",139700
-"54","Darmstadt","Hessen",137800
-"55","Potsdam","Brandenburg",128700
-"56","WÃ¼rzburg","Bavaria",127200
-"57","GÃ¶ttingen","Lower Saxony",127100
-"58","Regensburg","Bavaria",125400
-"59","Recklinghausen","Northrhine-Westfalia",124500
-"60","Bottrop","Northrhine-Westfalia",122100
-"61","Wolfsburg","Lower Saxony",119300
-"62","Heilbronn","Baden-WÃ¼rttemberg",118500
-"63","Ingolstadt","Bavaria",118000
-"64","Ulm","Baden-WÃ¼rttemberg",117700
-"65","Remscheid","Northrhine-Westfalia",117700
-"66","Pforzheim","Baden-WÃ¼rttemberg",117100
-"67","Bremerhaven","Bremen",116800
-"68","Offenbach","Hessen",115500
-"69","FÃ¼rth","Bavaria",111900
-"70","Reutlingen","Baden-WÃ¼rttemberg",111400
-"71","Salzgitter","Lower Saxony",111400
-"72","Siegen","Northrhine-Westfalia",108900
-"73","Gera","Thuringia",108800
-"74","Koblenz","Rhineland-Palatinate",108800
-"75","Moers","Northrhine-Westfalia",106600
-"76","Bergisch Gladbach","Northrhine-Westfalia",106100
-"77","Cottbus","Brandenburg",105000
-"78","Hildesheim","Lower Saxony",103700
-"79","Witten","Northrhine-Westfalia",103400
-"80","Zwickau","Saxony",100900
-"81","Erlangen","Bavaria",100100
-"82","Iserlohn","Northrhine-Westfalia",99800
-"83","Trier","Rhineland-Palatinate",99100
-"84","Kaiserslautern","Rhineland-Palatinate",98800
-"85","Jena","Thuringia",97500
-"86","Schwerin","Mecklenburg-Vorpommern",97400
-"87","GÃ¼tersloh","Northrhine-Westfalia",97100
-"88","Marl","Northrhine-Westfalia",94500
-"89","LÃ¼nen","Northrhine-Westfalia",91700
-"90","Esslingen","Baden-WÃ¼rttemberg",91000
-"91","Velbert","Northrhine-Westfalia",90500
-"92","Ratingen","Northrhine-Westfalia",89800
-"93","DÃ¼ren","Northrhine-Westfalia",89600
-"94","Ludwigsburg","Baden-WÃ¼rttemberg",88000
-"95","Wilhelmshaven","Lower Saxony",87800
-"96","Hanau","Hessen",86400
-"97","Minden","Northrhine-Westfalia",84400
-"98","Flensburg","Schleswig-Holstein",83800
-"99","Dessau","Saxony-Anhalt",81800
-"100","Villingen-Schwenningen","Baden-WÃ¼rttemberg",81500
+"","City","State","Population","lon","lat","location"
+"1","Aachen","Northrhine-Westfalia",241300,6.0838868,50.7753455,"Aachen"
+"2","Augsburg","Bavaria",253800,10.89779,48.3705449,"Augsburg"
+"3","Bergisch Gladbach","Northrhine-Westfalia",106100,7.1286213,50.9923091,"Bergisch Gladbach"
+"4","Berlin","Berlin",3275000,13.404954,52.5200066,"Berlin"
+"5","Bielefeld","Northrhine-Westfalia",320900,8.5324708,52.0302285,"Bielefeld"
+"6","Bochum","Northrhine-Westfalia",388100,7.2162363,51.4818445,"Bochum"
+"7","Bonn","Northrhine-Westfalia",307500,7.0982068,50.73743,"Bonn"
+"8","Bottrop","Northrhine-Westfalia",122100,6.9446888,51.529086,"Bottrop"
+"9","Braunschweig","Lower Saxony",243700,10.5267696,52.2688736,"Braunschweig"
+"10","Bremen","Bremen",527900,8.8016937,53.0792962,"Bremen"
+"11","Bremerhaven","Bremen",116800,8.5809424,53.5395845,"Bremerhaven"
+"12","Chemnitz","Saxony",255600,12.9213697,50.827845,"Chemnitz"
+"13","Cottbus","Brandenburg",105000,14.3328679,51.7563108,"Cottbus"
+"14","Darmstadt","Hessen",137800,8.6511929,49.8728253,"Darmstadt"
+"15","Dessau","Saxony-Anhalt",81800,12.2423302,51.8308166,"Dessau"
+"16","Dortmund","Northrhine-Westfalia",587600,7.4652981,51.5135872,"Dortmund"
+"17","Dresden","Saxony",473300,13.7372621,51.0504088,"Dresden"
+"18","Duisburg","Northrhine-Westfalia",513400,6.7623293,51.4344079,"Duisburg"
+"19","Düren","Northrhine-Westfalia",89600,6.481105,50.8029513,"Düren"
+"20","Düsseldorf","Northrhine-Westfalia",568900,6.7734556,51.2277411,"Düsseldorf"
+"21","Erfurt","Thuringia",195000,11.0298799,50.9847679,"Erfurt"
+"22","Erlangen","Bavaria",100100,11.0119611,49.5896744,"Erlangen"
+"23","Essen","Northrhine-Westfalia",588800,7.0115552,51.4556432,"Essen"
+"24","Esslingen","Baden-Württemberg",91000,9.3201122,48.7433425,"Esslingen"
+"25","Flensburg","Schleswig-Holstein",83800,9.4469964,54.7937431,"Flensburg"
+"26","Frankfurt","Hessen",648000,8.6821267,50.1109221,"Frankfurt"
+"27","Freiburg","Baden-Württemberg",206300,7.8421043,47.9990077,"Freiburg"
+"28","Fürth","Bavaria",111900,10.988667,49.4771169,"Fürth"
+"29","Gelsenkirchen","Northrhine-Westfalia",276200,7.0857172,51.517744,"Gelsenkirchen"
+"30","Gera","Thuringia",108800,12.0807203,50.8850706,"Gera"
+"31","Göttingen","Lower Saxony",127100,9.9158035,51.5412804,"Göttingen"
+"32","Gütersloh","Northrhine-Westfalia",97100,8.3857535,51.9032375,"Gütersloh"
+"33","Hagen","Northrhine-Westfalia",201700,7.4632841,51.3670777,"Hagen"
+"34","Halle","Saxony-Anhalt",237400,11.9688029,51.4969802,"Halle"
+"35","Hamburg","Hamburg",1686100,9.9936818,53.5510846,"Hamburg"
+"36","Hamm","Northrhine-Westfalia",180300,7.8159816,51.6738583,"Hamm"
+"37","Hanau","Hessen",86400,8.9283105,50.1264123,"Hanau"
+"38","Hannover","Lower Saxony",516300,9.7320104,52.3758916,"Hannover"
+"39","Heidelberg","Baden-Württemberg",139700,8.6724335,49.3987524,"Heidelberg"
+"40","Heilbronn","Baden-Württemberg",118500,9.210879,49.1426929,"Heilbronn"
+"41","Herne","Northrhine-Westfalia",174200,7.2009147,51.5368948,"Herne"
+"42","Hildesheim","Lower Saxony",103700,9.9579652,52.154778,"Hildesheim"
+"43","Ingolstadt","Bavaria",118000,11.4257541,48.7665351,"Ingolstadt"
+"44","Iserlohn","Northrhine-Westfalia",99800,7.6960842,51.3765096,"Iserlohn"
+"45","Jena","Thuringia",97500,11.5892372,50.927054,"Jena"
+"46","Kaiserslautern","Rhineland-Palatinate",98800,7.7491265,49.4400657,"Kaiserslautern"
+"47","Karlsruhe","Baden-Württemberg",279600,8.4036527,49.0068901,"Karlsruhe"
+"48","Kassel","Hessen",193500,9.4797461,51.3127114,"Kassel"
+"49","Kiel","Schleswig-Holstein",229900,10.1227652,54.3232927,"Kiel"
+"50","Koblenz","Rhineland-Palatinate",108800,7.5889959,50.3569429,"Koblenz"
+"51","Köln","Northrhine-Westfalia",965300,6.9602786,50.937531,"Köln"
+"52","Krefeld","Northrhine-Westfalia",238000,6.5853417,51.3387609,"Krefeld"
+"53","Leipzig","Saxony",486100,12.3730747,51.3396955,"Leipzig"
+"54","Leverkusen","Northrhine-Westfalia",161700,7.0192196,51.0459248,"Leverkusen"
+"55","Lübeck","Schleswig-Holstein",213400,10.6865593,53.8654673,"Lübeck"
+"56","Ludwigsburg","Baden-Württemberg",88000,9.195464,48.8940624,"Ludwigsburg"
+"57","Ludwigshafen","Rhineland-Palatinate",162000,8.44518,49.47741,"Ludwigshafen"
+"58","Lünen","Northrhine-Westfalia",91700,7.5285074,51.6104829,"Lünen"
+"59","Magdeburg","Saxony-Anhalt",224100,11.6276237,52.1205333,"Magdeburg"
+"60","Mainz","Rhineland-Palatinate",186700,8.2472526,49.9928617,"Mainz"
+"61","Mannheim","Baden-Württemberg",306100,8.4660395,49.4874592,"Mannheim"
+"62","Marl","Northrhine-Westfalia",94500,7.1060218,51.6591234,"Marl"
+"63","Minden","Northrhine-Westfalia",84400,8.8949206,52.2964919,"Minden"
+"64","Moers","Northrhine-Westfalia",106600,6.6408148,51.4516041,"Moers"
+"65","Mönchengladbach","Northrhine-Westfalia",264400,6.4428041,51.1804572,"Mönchengladbach"
+"66","Mülheim","Northrhine-Westfalia",173000,6.8845226,51.4185682,"Mülheim"
+"67","München","Bavaria",1185400,11.5819806,48.1351253,"München"
+"68","Münster","Northrhine-Westfalia",265900,7.6261347,51.9606649,"Münster"
+"69","Neuss","Northrhine-Westfalia",150400,6.6879511,51.2041968,"Neuss"
+"70","Nürnberg","Bavaria",486700,11.07675,49.45203,"Nürnberg"
+"71","Oberhausen","Northrhine-Westfalia",221700,6.8637765,51.4963341,"Oberhausen"
+"72","Offenbach","Hessen",115500,8.7760843,50.0956362,"Offenbach"
+"73","Oldenburg","Lower Saxony",157600,8.2145521,53.1434501,"Oldenburg"
+"74","Osnabrück","Lower Saxony",164000,8.0471788,52.2799112,"Osnabrück"
+"75","Paderborn","Northrhine-Westfalia",141200,8.7575093,51.7189205,"Paderborn"
+"76","Pforzheim","Baden-Württemberg",117100,8.6946286,48.8921862,"Pforzheim"
+"77","Potsdam","Brandenburg",128700,13.0644729,52.3905689,"Potsdam"
+"78","Ratingen","Northrhine-Westfalia",89800,6.8401844,51.2964148,"Ratingen"
+"79","Recklinghausen","Northrhine-Westfalia",124500,7.1979453,51.6140649,"Recklinghausen"
+"80","Regensburg","Bavaria",125400,12.1016236,49.0134297,"Regensburg"
+"81","Remscheid","Northrhine-Westfalia",117700,7.1896962,51.1787418,"Remscheid"
+"82","Reutlingen","Baden-Württemberg",111400,9.2038043,48.5069389,"Reutlingen"
+"83","Rostock","Mecklenburg-Vorpommern",192100,12.0991466,54.0924406,"Rostock"
+"84","Saarbrücken","Saarland",180000,6.9969327,49.2401572,"Saarbrücken"
+"85","Salzgitter","Lower Saxony",111400,10.3899126,52.1378659,"Salzgitter"
+"86","Schwerin","Mecklenburg-Vorpommern",97400,11.4012499,53.6355022,"Schwerin"
+"87","Siegen","Northrhine-Westfalia",108900,8.0209591,50.8838492,"Siegen"
+"88","Solingen","Northrhine-Westfalia",164500,7.0831408,51.1702072,"Solingen"
+"89","Stuttgart","Baden-Württemberg",581100,9.1829321,48.7758459,"Stuttgart"
+"90","Trier","Rhineland-Palatinate",99100,6.6371433,49.749992,"Trier"
+"91","Ulm","Baden-Württemberg",117700,9.9876076,48.4010822,"Ulm"
+"92","Velbert","Northrhine-Westfalia",90500,7.0426775,51.3370703,"Velbert"
+"93","Villingen-Schwenningen","Baden-Württemberg",81500,8.4640869,48.0594021,"Villingen-Schwenningen"
+"94","Wiesbaden","Hessen",269200,8.2397608,50.0782184,"Wiesbaden"
+"95","Wilhelmshaven","Lower Saxony",87800,8.1068722,53.5323403,"Wilhelmshaven"
+"96","Witten","Northrhine-Westfalia",103400,7.353197,51.4438926,"Witten"
+"97","Wolfsburg","Lower Saxony",119300,10.7865461,52.4226503,"Wolfsburg"
+"98","Wuppertal","Northrhine-Westfalia",365400,7.1507636,51.2562128,"Wuppertal"
+"99","Würzburg","Bavaria",127200,9.9533548,49.7913044,"Würzburg"
+"100","Zwickau","Saxony",100900,12.4733725,50.7102169,"Zwickau"

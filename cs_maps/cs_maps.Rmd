@@ -27,14 +27,27 @@ library(rgdal) # for getting shapefiles
 library(ggplot2) # for 'fortifying'
 library(ggmap); library(ggthemes) # for themes
 
+library(maptools)
+x <- readShapePoly("germany/DEU_adm1.shp")
+data=readShapePoly("germany/DEU_adm1.shp", proj4string = crsXXX, verbose = F)
+
 # country level
 germany_raw <- readOGR(dsn = "germany", layer = "DEU_adm0")
 class(germany_raw)
+plot(germany_raw)
+```
+
+Let's try to plot this somewhat nicer, with `ggplot2`.
+
+```{r}
 fortify # S3 function
 ggplot2:::fortify.SpatialPolygonsDataFrame
+ggplot2:::fortify.Polygon
+length(germany_raw@polygons[[1]]@Polygons)
+
 germany <- ggplot2:::fortify.SpatialPolygonsDataFrame(germany_raw)
 str(germany)
-ggplot(germany, aes(x = long, y = lat, group = group)) +
+ggplot(x, aes(x = long, y = lat, group = group)) +
     geom_polygon(fill = "blue", col = "white") +
     coord_map() + 
     theme_nothing()
@@ -48,39 +61,51 @@ ggplot(bundes, aes(x = long, y = lat, group = group)) +
     geom_polygon(fill = "blue", col = "white") +
     coord_map() + 
     theme_nothing()
+```
 
-## Color according to unemployment
+Next, we can color things according to unemployment:
 
-# Add names again
-bundes$state <- factor(as.numeric(bundes$id))
-levels(bundes$state) <- bundes_raw$NAME_1
-
-# Import unemployment data
+```{r}
 unemp <- read.delim("germany_unemployment.txt")
+str(unemp)
 
-# merge bundes and unemp
+# Add names to bundes so you can merge
+bundes$state <- factor(as.numeric(bundes$id))
+levels(bundes$state) <- bundes_raw$NAME_1 
+
+# Merge bundes and unemp, on state
 bundes_unemp <- merge(bundes, unemp)
 
-# Choropleth
+# Create plot, colored according to unemployment
 ggplot(bundes_unemp, aes(x = long, y = lat, group = group, fill = unemployment)) +
   geom_polygon() +
   coord_map() +
   theme_map()
+```
 
+We can take it one stap further by superimposing german cities and size according to population:
+
+```{r}
 # Get coordinates of major cities, with population estimates
 cities <- read.csv("german_cities.csv")
-ggplot(bundes_unemp, aes(x = long, y = lat, fill = unemployment)) +
-  geom_polygon(aes(group = group)) +
-  geom_point(data = cities, aes(size = Pop_est),
-             col = "red", shape = 16, alpha = 0.6) +
+
+# Plot different layers
+ggplot(bundes_unemp) +
+  geom_polygon(aes(x = long, y = lat, group = group, fill = unemployment)) +
+  geom_point(data = cities, aes(x = lon, y = lat, size = Population),
+             col = "red", shape = 16, alpha = 0.7) +
+  scale_size(range = c(0,15)) +
   coord_map() +
   theme_map()
-
 ```
+
+No clear connection though...
+
+## Extra: scrape german cities info
 
 How the german cities data frame came about:
 
-```{r}
+```{r, eval = FALSE}
 write("
 // scrape_techstars.js
 
@@ -98,7 +123,8 @@ page.open('http://www.citymayors.com/gratis/german_topcities.html', function (st
 ", file = "scrape_web.js")
 system("./phantomjs scrape_web.js")
 
-lines <- read_html("germancities.html", encoding = ) %>% guess_encoding()
+library(rvest)
+lines <- read_html("germancities.html", encoding = "UTF-8") %>%
   html_nodes("table tbody tr td table tbody tr") %>% html_text()
 
 # drop last
@@ -108,10 +134,9 @@ df <- as.data.frame(do.call(rbind, clean[-1]), stringsAsFactors = FALSE)
 names(df) <- clean[[1]]
 df$Rank <- as.numeric(df$Rank)
 df$Population <- as.numeric(gsub(",", "", df$Population))
-class(batches)
 df$Rank <- NULL
 xy <- ggmap::geocode(location = df$City)
-xy$location <- df$City
+xy$City <- df$City
 ultra_df <- merge(df, xy)
 write.csv(ultra_df, file = "german_cities.csv")
 ```
