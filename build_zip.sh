@@ -1,11 +1,11 @@
 # Convert intro.Rmd to PDF
-R -e 'library(rmarkdown); render("R2.0_intro.Rmd")'
+tit=emergent_data_4_good
 
 # Zip all files
-zip -r emergent.zip R2.0_intro.Rmd R2.0_intro.pdf cs_movies/movies.Rmd cs_movies/omdb.db cs_movies/rotten_tomatoes.csv cs_libraries/cs_libraries.Rmd
+zip -r $tit.zip intro.Rmd intro.html r_language.Rmd cs_maps/* cs_bank/* -x cs_maps/phantomjs
 
 # Put files on S3
-s3cmd put --acl-public emergent.zip s3://documents.datacamp.com/emergent/
+aws s3 cp --acl public-read $tit.zip s3://documents.datacamp.com/
 
 # clean up local zip
-rm emergent.zip
+rm $tit.zip

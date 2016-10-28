@@ -9,61 +9,57 @@ output: html_document
 setwd("~/workspace/r-workshop/cs_maps/")
 ```
 
-Shapefiles can be used to describe points, polylines or polygons - here you'll focus on polygons for drawing maps.
+Shapefiles can be used to describe points, polylines or polygons. A single shapefile actually consists of several files, each describing a specific aspect of the overall geometry. 
 
-A single shapefile actually consists of several files, each describing a specific aspect of the overall geometry. The three core file types are:
+- `.shp` describes the shape, the feature geometry itself.
+- `.shx` represents the shape index, a positional index.
+- `.dbf` contains the attributes for each shape arranged in columns.
 
-- `.shp`: the shape, the feature geometry itself.
-- `.shx`: the shape index, a positional index.
-- `.dbf`: the attribute, attributes for each shape arranged in columns.
-
-The prefix name of these files must be consistent and they must be kept in the same directory. The files you'll use are for Germany, and all begin with `DEU`. The suffix specifies the level of organization: 
+The prefix name of these files must be consistent and they must be kept in the same directory. Here we have data for Germany, all starting with `DEU`. The suffix specifies the level of organization: 
 
 - `DEU_adm0` is the administrative (political) boundaries of the entire country
 - `DEU_adm1` is the administrative boundaries for each of the 16 states
 
+We will use `rgdal::readOGR()` to import the `DEU_adm1` data.
+
+Other packages: `rgeos`, `maptools`, `sp`
+
 ```{r}
 library(rgdal) # for getting shapefiles
-library(ggplot2) # for 'fortifying'
-library(ggmap); library(ggthemes) # for themes
-
-library(maptools)
-x <- readShapePoly("germany/DEU_adm1.shp")
-data=readShapePoly("germany/DEU_adm1.shp", proj4string = crsXXX, verbose = F)
-
-# country level
-germany_raw <- readOGR(dsn = "germany", layer = "DEU_adm0")
-class(germany_raw)
-plot(germany_raw)
-```
-
-Let's try to plot this somewhat nicer, with `ggplot2`.
-
-```{r}
-fortify # S3 function
-ggplot2:::fortify.SpatialPolygonsDataFrame
-ggplot2:::fortify.Polygon
-length(germany_raw@polygons[[1]]@Polygons)
-
-germany <- ggplot2:::fortify.SpatialPolygonsDataFrame(germany_raw)
-str(germany)
-ggplot(x, aes(x = long, y = lat, group = group)) +
-    geom_polygon(fill = "blue", col = "white") +
-    coord_map() + 
-    theme_nothing()
-
-# state level (bundes)
 bundes_raw <- readOGR(dsn = "germany", layer = "DEU_adm1")
 class(bundes_raw)
+plot(bundes_raw)
+```
+
+Let's try to plot this somewhat nicer, with `ggplot2`. We will use `fortify` to convert the `SpatialPolygonsDataFrame` to a more suitable format.
+
+```{r}
+library(ggplot2)
+library(ggmap) # for themes
+library(ggthemes) # for themes
+
+fortify # S3 function (multiple dispatch) 
+ggplot2:::fortify.SpatialPolygonsDataFrame
+ggplot2:::fortify.Polygon
+length(bundes_raw@polygons[[1]]@Polygons)
+
+# Convert SpatialPolygonsDataFrame to data.frame
 bundes <- fortify(bundes_raw)
+
+# Display structure
 str(bundes)
+
+# Stupid plot
+plot(bundes$long, bundes$lat, pch = ".")
+
+# Nice plot
 ggplot(bundes, aes(x = long, y = lat, group = group)) +
-    geom_polygon(fill = "blue", col = "white") +
+    geom_polygon(fill = "#f4cb42", col = "#44434c") +
     coord_map() + 
     theme_nothing()
 ```
 
-Next, we can color things according to unemployment:
+Suppose we now have additional data on unemployment in Germany's different Bundes.
 
 ```{r}
 unemp <- read.delim("germany_unemployment.txt")
@@ -121,6 +117,8 @@ page.open('http://www.citymayors.com/gratis/german_topcities.html', function (st
   phantom.exit();
 });
 ", file = "scrape_web.js")
+
+# First get phantomjs from http://phantomjs.org/
 system("./phantomjs scrape_web.js")
 
 library(rvest)
