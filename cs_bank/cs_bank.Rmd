@@ -6,6 +6,7 @@ Typical steps of an analysis in R:
 - Explore
 - Model
 - Visualize
+- Assess
 - Report
 
 ## Preperation
@@ -76,12 +77,14 @@ tree <- rpart(subscribed ~ ., data = train, method = "class")
 
 ## Visualize
 
-```{r viz}
+```{r viz, warning= FALSE, message=FALSE}
 library(rattle)
 library(rpart.plot)
 library(RColorBrewer)
 fancyRpartPlot(tree)
 ```
+
+## Assess
 
 Does this model generalize to unseen observations? Try out the model on a test set, that you haven't used to train your model.
 
@@ -97,10 +100,10 @@ accuracy <- (conf[1,1] + conf[2,2]) / sum(conf)
 accuracy
 ```
 
-Highly skewed distribution (way less subscribers than non-subscribers): accuracy is not a good metric. ROC is better!
+Highly skewed distribution (way less subscribers than non-subscribers): accuracy is not a good metric. ROC, and area under the ROC is better!
 
 Back to the drawing board?
 
 ## Report
 
-Just _knit_ this file using `knitr`!
+Just _knit_ this file using `knitr` and your report is done!
