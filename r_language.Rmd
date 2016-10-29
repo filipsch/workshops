@@ -88,7 +88,7 @@ summ3[[3]]$score
 options(stringsAsFactors = FALSE)
 
 courses <- c("algebra", "physics", "management", "religion")
-scores <- c(12, 17, 19, 9)
+scores <- c(12, 17, 19, NA)
 passed <- c(TRUE, TRUE, TRUE, FALSE)
 
 results <- data.frame(courses, scores, passed)
@@ -120,8 +120,9 @@ results$scores
 mean(results$scores) # mean is a base R function
 
 my_mean <- function(a, b) {
-  a + b / 2
+  ( a + b ) / 2
 }
+
 my_mean(5, 2)
 ```
 
@@ -136,12 +137,6 @@ install.packages("DT")
 library(DT)
 datatable(results)
 ```
-
-## Let's practice!
-
-- Create account on https://www.datacamp.com/
-- Head over to https://www.datacamp.com/courses/r-workshop 
-- Click 'Start Course For Free'
 
 # Other programming concepts (extra)
 
