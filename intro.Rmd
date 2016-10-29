@@ -11,11 +11,13 @@ output: ioslides_presentation
 - Video lessons and coding challenges
     + In-browser, self-paced
 - World class instructors
+- DataCamp for Groups
+- [www.datacamp.com/demo](www.datacamp.com/demo)
 
 ## We're hiring
 
 - Always looking for smart people
-- Still studying? No worries!
+- Still studying? No problem!
 - Get in touch: filip@datacamp.com
 
 ## About the Workshop

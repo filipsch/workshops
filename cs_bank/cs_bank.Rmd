@@ -18,8 +18,9 @@ Typical steps of an analysis in R:
 ## Import
 
 ```{r import}
-setwd("~/courses/r-workshop/bank_marketing/")
-bank <- read.csv("bank-full.csv", sep = ";")
+# Change to path of cs_bank/
+setwd("~/workspace/r-workshop/cs_bank/")
+bank <- read.csv("bank.csv", sep = ";")
 ```
 
 ## Explore
@@ -38,8 +39,9 @@ library(dplyr)
 library(ggvis)
 
 bank %>%
-  group_by(subscribed) %>% ggvis(~age, fill = ~subscribed) %>%
-    layer_densities()
+  group_by(subscribed) %>%
+  ggvis(~age, fill = ~subscribed) %>%
+  layer_densities()
 
 bank %>% 
   group_by(subscribed) %>% ggvis(~age, fill = ~subscribed) %>%
@@ -69,7 +71,7 @@ train <- bank_scrambled[1:floor(0.7*n),]
 test <- bank_scrambled[(floor(0.7*n)+1):n,]
 
 library(rpart)
-tree <- rpart(subscribed ~ ., train, method = "class")
+tree <- rpart(subscribed ~ ., data = train, method = "class")
 ```
 
 ## Visualize
@@ -84,7 +86,7 @@ fancyRpartPlot(tree)
 Does this model generalize to unseen observations? Try out the model on a test set, that you haven't used to train your model.
 
 ```{r predict}
-pred <- predict(tree, test, type = "class")
+pred <- predict(tree, newdata = test, type = "class")
 
 # build confusion matrix
 conf <- table(test$subscribed, pred)
@@ -94,6 +96,8 @@ conf
 accuracy <- (conf[1,1] + conf[2,2]) / sum(conf)
 accuracy
 ```
+
+Highly skewed distribution (way less subscribers than non-subscribers): accuracy is not a good metric. ROC is better!
 
 Back to the drawing board?
 

@@ -4,10 +4,9 @@
 - Variable assignment: `<-`
 - Different data types: numeric, character, logical
 - As you execute R commands, you accumulate a workspace.
-- R scripts.
-- Lines of R code, executed one after the other
+- R scripts: Lines of R code, executed one after the other
 
-```
+```{r}
 score <- 12
 course <- "algebra"
 passed <- TRUE
@@ -86,7 +85,7 @@ summ3[[3]]$score
 - Different ways of subsetting
 
 ```{r, error = TRUE}
-options(stringsAsFactors=FALSE)
+options(stringsAsFactors = FALSE)
 
 courses <- c("algebra", "physics", "management", "religion")
 scores <- c(12, 17, 19, 9)

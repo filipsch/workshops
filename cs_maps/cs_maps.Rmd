@@ -5,9 +5,19 @@ date: "April 26, 2016"
 output: html_document
 ---
 
+## Preparation
+
 ```{r}
+# If not installed: uncomment line below
+# install.packages(c("rgdal", "ggplot2", "ggmap", "ggthemes", "viridis", "rvest"))
+```
+
+```{r}
+# Change to path of cs_maps/
 setwd("~/workspace/r-workshop/cs_maps/")
 ```
+
+## Shape files
 
 Shapefiles can be used to describe points, polylines or polygons. A single shapefile actually consists of several files, each describing a specific aspect of the overall geometry. 
 
@@ -31,12 +41,13 @@ class(bundes_raw)
 plot(bundes_raw)
 ```
 
-Let's try to plot this somewhat nicer, with `ggplot2`. We will use `fortify` to convert the `SpatialPolygonsDataFrame` to a more suitable format.
+Let's try to plot this somewhat nicer and more extensible, with `ggplot2`. We will use `fortify` to convert the `SpatialPolygonsDataFrame` to a more suitable format.
 
 ```{r}
 library(ggplot2)
 library(ggmap) # for themes
 library(ggthemes) # for themes
+library(viridis) # for a nice color theme
 
 fortify # S3 function (multiple dispatch) 
 ggplot2:::fortify.SpatialPolygonsDataFrame
@@ -67,7 +78,7 @@ str(unemp)
 
 # Add names to bundes so you can merge
 bundes$state <- factor(as.numeric(bundes$id))
-levels(bundes$state) <- bundes_raw$NAME_1 
+levels(bundes$state) <- bundes_raw$NAME_1
 
 # Merge bundes and unemp, on state
 bundes_unemp <- merge(bundes, unemp)
@@ -76,7 +87,8 @@ bundes_unemp <- merge(bundes, unemp)
 ggplot(bundes_unemp, aes(x = long, y = lat, group = group, fill = unemployment)) +
   geom_polygon() +
   coord_map() +
-  theme_map()
+  theme_map() + 
+  scale_fill_viridis()
 ```
 
 We can take it one stap further by superimposing german cities and size according to population:
@@ -92,10 +104,11 @@ ggplot(bundes_unemp) +
              col = "red", shape = 16, alpha = 0.7) +
   scale_size(range = c(0,15)) +
   coord_map() +
-  theme_map()
+  theme_map() +
+  scale_fill_viridis()
 ```
 
-No clear connection though...
+No clear connection...
 
 ## Extra: scrape german cities info
 
@@ -145,4 +158,4 @@ This is a R Markdown document, which is fully reproducible. Simply hit 'Knit HTM
 
 ## References
 
-These scripts are based on work that Rick Scavetta did for DataCamp, in his [third course on ggplot2](https://www.datacamp.com/courses/862)
+These scripts are based on work that Rick Scavetta did for DataCamp, in his [third course on ggplot2](https://www.datacamp.com/courses/862).
