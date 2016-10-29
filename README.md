@@ -1,8 +1,16 @@
 # Workshops and talks about R
 
-## June 30, 2016 - UseR 2016
+## October 29, 2016 - Data 4 Good Challenge (Leuven)
 
-Presentation of the [tutorial package](https://github.com/datacamp/tutorial), a wrapper around the amazing DataCamp Light project to make your reports interactive playgrounds. The slides and other documents can be found [here](https://github.com/filipsch/user2016-tutorial).
+An introduction to the basics of R, such as vectors, list and data frames. Case study on geographical data to plot unemployment in Germany's states, and case study on bank data in a marketing context.
+
+## October 14, 2016 - eRum 2016 (Poznan, Poland)
+
+Presentation of the [tutorial package](https://github.com/datacamp/tutorial), a wrapper around the DataCamp Light project to make your reports interactive playgrounds. The slides and other documents can be found [here](https://github.com/filipsch/erum2016-tutorial).
+
+## June 30, 2016 - UseR 2016 (Stanford)
+
+Presentation of the [tutorial package](https://github.com/datacamp/tutorial), a wrapper around the DataCamp Light project to make your reports interactive playgrounds. The slides and other documents can be found [here](https://github.com/filipsch/erum2016-tutorial).
 
 ## April 28, 2016 - Quivr
 
@@ -23,4 +31,5 @@ A crash course into the R language. Hands-on case study where decision trees are
 ## April 14, 2015 - Women in Machine Learnng, NY
 
 A crash course into the R language. Hands-on case study where data from the Open Movie Databases is imported, cleaned, modelled, visualized and finally reported.
+
 
