@@ -1,8 +1,8 @@
 # Convert intro.Rmd to PDF
-tit=emergent_data_4_good
+tit=aft_workshop
 
 # Zip all files
-zip -r $tit.zip intro.Rmd intro.html r_language.Rmd example_script.R cs_maps/* cs_bank/* -x cs_maps/phantomjs
+zip -r $tit.zip intro_r_python.Rmd intro_r_python.html r_language.Rmd example_script.R cs_movies/* cs_bank/*
 
 # Put files on S3
 aws s3 cp --acl public-read $tit.zip s3://documents.datacamp.com/
