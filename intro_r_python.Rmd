@@ -10,8 +10,7 @@ output: ioslides_presentation
 - > 600,000 registered users
 - Video lessons and coding challenges
     + In-browser, self-paced
-- World class instructors
-- DataCamp for Groups
+- World-class instructors
 - [www.datacamp.com/demo](www.datacamp.com/demo)
 
 ## We're hiring
@@ -23,29 +22,29 @@ output: ioslides_presentation
 
 ## About the Workshop
 
-- Basic intro to R
-- Case Study 1: maps data
-- Case Study 2: machine learning
+- Intro to R and Python
+- Case Study 1: Data exploration
+- Case Study 2: Machine learning
+- You can follow along
 - Questions? Yes please!
 
-## R
+## R & Python
 
-- Language for Statistical Computing
-- New Zealand, 90s
-- Open source
-- Command-Line > Point and click
-- Share code through R scripts and packages
-- Huge vibrant online community
-- Great for visualization
-- Has to fit in the main memory
+| R       | Python |
+| ------- | ------ |
+| New Zealand, 90s | Netherlands, 90s |
+| Open source | Open source |
+| Command-Line > Point and click | Command-line > Point and click |
+| Share code through R scripts and packages | Share code through Python scripts and package |
+| Visualization | Production-ready applications |
+| Has to fit in the main memory | Fully fledged programming language |
 
 ## Get Started!
 
 - Install R: https://cran.rstudio.com/
 - Install RStudio, an IDE: https://www.rstudio.com/products/rstudio/download/
+- Install Python + packages: https://anaconda.
 - Download zip: [bit.ly/2eDMr8h](bit.ly/2eDMr8h) or on [GitHub](https://github.com/filipsch/r-workshop)
 - Unzip
-- Open up RStudio
-- Set working directory to point to unzipped folder
 
 

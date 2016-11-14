@@ -1,5 +1,9 @@
 # Workshops and talks about R
 
+## November 29, 2016 - Academics for Technology
+
+Introduction to the basics of R and Python, and their data structures. Highlight similarities and differences. Short overview of the data analysis process, so you can start your own analyses in R or Python.
+
 ## October 29, 2016 - Data 4 Good Challenge (Leuven)
 
 An introduction to the basics of R, such as vectors, list and data frames. Case study on geographical data to plot unemployment in Germany's states, and case study on bank data in a marketing context.
