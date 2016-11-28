@@ -1,4 +1,13 @@
-# Fundamentals
+# Introduction to R
+
+NOTE: This is R Markdown
+
+- Combine text and code easily
+- Reproducible outcome
+- Easy to share
+- Other way: R script (see example)
+
+## Fundamentals
 
 - Explore the console: simple calculations
 - Variable assignment: `<-`
@@ -13,15 +22,15 @@ passed <- TRUE
 ls()
 ```
 
-# Data structures
+## Data structures
 
-## Vectors
+### Vectors
 
 - 1 Dimensional
 - Single type
 - `c()`
 - Subsetting with `[ ]`
-- Single numbers are also vectors, of length 1!
+- Element-wise calculations
 
 ```{r}
 # creation
@@ -40,9 +49,13 @@ scores
 # subsetting
 scores[2]
 scores["physics"]
+
+# Element-wise calculations
+other_scores <- c(10, 18, 18, 14)
+scores - other_scores
 ```
 
-## Lists
+### Lists
 
 - 1 Dimensional
 - Different types: numerics, logicals, vectors, lists ...
@@ -75,7 +88,7 @@ summ3[[3]][[2]]
 summ3[[3]]$score
 ```
 
-## Data Frames
+### Data Frames
 
 - 2 Dimensional
 - Heterogeneous content
@@ -103,9 +116,9 @@ results$courses
 str(results)
 ```
 
-# Functions and Packages
+## Functions and Packages
 
-## Functions
+### Functions
 
 - Tons of them available in R.
 - Solve particular, well-defined problem.
@@ -126,7 +139,7 @@ my_mean <- function(a, b) {
 my_mean(5, 2)
 ```
 
-## R Packages
+### R Packages
 
 R Packages: sets of R functions, data and compiled code to help solve a typical problem. Packages for visualization, high frequency trading, advanced statistical analyses, SOTA machine learning implementations. Most of them are on [CRAN](http://cran.r-project.org/), the _Comprehensive R Archive Network_. Google is your friend!
 
@@ -138,9 +151,9 @@ library(DT)
 datatable(results)
 ```
 
-# Other programming concepts (extra)
+## Other programming concepts (extra)
 
-## Control Structures
+### Control Structures
 
 - use results of comparators to customize behavior
 
@@ -160,13 +173,7 @@ if(color == "green") {
 } else {
   print("I can't really tell what you like..")
 }
-```
-    
-## Loops
-    
-- repeated execution of code chunks
 
-```{r}
 for(i in 1:5) {
   print(i)
 }

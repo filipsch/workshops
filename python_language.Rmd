@@ -1,7 +1,0 @@
-# Fundamentals
-
-- Explore the console: simple calculations
-- Variable assignment: `=`
-- Different data types: numeric, character, boolean (logical)
-- As you execute Python commands, you accumulate a workspace.
-- Python scripts: Lines of Python code, executed one after the other

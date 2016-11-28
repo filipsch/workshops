@@ -23,6 +23,7 @@ output: ioslides_presentation
 ## About the Workshop
 
 - Intro to R and Python
+- Try R and Python on DataCamp
 - Case Study 1: Data exploration
 - Case Study 2: Machine learning
 - You can follow along
@@ -43,8 +44,10 @@ output: ioslides_presentation
 
 - Install R: https://cran.rstudio.com/
 - Install RStudio, an IDE: https://www.rstudio.com/products/rstudio/download/
-- Install Python + packages: https://anaconda.
-- Download zip: [bit.ly/2eDMr8h](bit.ly/2eDMr8h) or on [GitHub](https://github.com/filipsch/r-workshop)
-- Unzip
+- Install Python: https://www.continuum.io/downloads
+- Download files and unzip
+  - Bitly link: **bit.ly/2gzwYYz**
+  - Github: **github.com/filipsch/workshop**
+
 
 
