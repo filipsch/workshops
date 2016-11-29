@@ -43,7 +43,7 @@ output: ioslides_presentation
 ## Get Started!
 
 - Install R: https://cran.rstudio.com/
-- Install RStudio, an IDE: https://www.rstudio.com/products/rstudio/download/
+- Install RStudio, an IDE: https://www.rstudio.com/
 - Install Python: https://www.continuum.io/downloads
 - Download files and unzip
   - Bitly link: **bit.ly/2gzwYYz**

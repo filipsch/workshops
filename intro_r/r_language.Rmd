@@ -151,6 +151,11 @@ library(DT)
 datatable(results)
 ```
 
+
+## Let's practice!
+
+Go to https://www.datacamp.com/courses/2310
+
 ## Other programming concepts (extra)
 
 ### Control Structures
