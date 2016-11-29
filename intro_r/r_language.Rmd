@@ -80,19 +80,18 @@ summ3 <- list(list(course = "algebra", score = 12, passed = TRUE),
               list(course = "relgion", score = 9, passed = FALSE))
 str(summ3)
 
-summ3[[1]]
+str(summ3[[1]])
 summ3[[1]][[1]]
 summ3[[1]]$course
 
 summ3[[3]][[2]]
-summ3[[3]]$score
+summ3[[3]][["score"]]
 ```
 
 ### Data Frames
 
 - 2 Dimensional
 - Heterogeneous content
-- Under the hood: a named list with same-length vectors
 - Typical structure for data sets: rows are observations, columns are variables.
 - `data.frame()` function
 - Different ways of subsetting
@@ -101,7 +100,7 @@ summ3[[3]]$score
 options(stringsAsFactors = FALSE)
 
 courses <- c("algebra", "physics", "management", "religion")
-scores <- c(12, 17, 19, NA)
+scores <- c(12, 17, 19, 9)
 passed <- c(TRUE, TRUE, TRUE, FALSE)
 
 results <- data.frame(courses, scores, passed)
@@ -126,7 +125,7 @@ str(results)
 - Black Box Principle
 - Can also write your own.
     
-```
+```{r}
 # What is your average score?
 results
 results$scores
