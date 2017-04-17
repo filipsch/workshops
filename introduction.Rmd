@@ -7,7 +7,7 @@ output: ioslides_presentation
 ## About DataCamp
 
 - Online Data Science School
-- > 600,000 registered users
+- > 900,000 registered users
 - Video lessons and coding challenges
     + In-browser, self-paced
 - World-class instructors
@@ -22,32 +22,26 @@ output: ioslides_presentation
 
 ## About the Workshop
 
-- Intro to R and Python
-- Try R and Python on DataCamp
+- Intro to R
+- Try R on DataCamp
 - Case Study 1: Data exploration
 - Case Study 2: Machine learning
 - You can follow along
 - Questions? Yes please!
 
-## R & Python
+## R
 
-| R       | Python |
-| ------- | ------ |
-| New Zealand, 90s | Netherlands, 90s |
-| Open source | Open source |
-| Command-Line > Point and click | Command-line > Point and click |
-| Share code through R scripts and packages | Share code through Python scripts and package |
-| Visualization | Production-ready applications |
-| Has to fit in the main memory | Fully fledged programming language |
+- New Zealand, 90s
+- Open source
+- Command-Line > Point and click
+- Share code through R scripts and packages
+- Great for Visualization
+- Has to fit in the main memory
 
 ## Get Started!
 
 - Install R: https://cran.rstudio.com/
 - Install RStudio, an IDE: https://www.rstudio.com/
-- Install Python: https://www.continuum.io/downloads
 - Download files and unzip
-  - Bitly link: **bit.ly/2gzwYYz**
+  - Bitly link: **http://bit.ly/2pptf40**
   - Github: **github.com/filipsch/workshop**
-
-
-

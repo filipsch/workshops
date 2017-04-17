@@ -1,6 +1,10 @@
 # Workshops and talks about R
 
-## November 29, 2016 - Academics for Technology
+## April 19, 2017 - Sagio (Leuven)
+
+Introduction to the basics of R and its data structures. Case study with movie data to showcase data cleaning and manipulation. Case study with marketing data to experiment with machine learning techniques.
+
+## November 29, 2016 - Academics for Technology (Leuven)
 
 Introduction to the basics of R and Python, and their data structures. Highlight similarities and differences. Short overview of the data analysis process, so you can start your own analyses in R or Python.
 
@@ -18,7 +22,7 @@ Presentation of the [tutorial package](https://github.com/datacamp/tutorial), a 
 
 ## April 28, 2016 - Quivr
 
-Case study with library data, going through the enitre process of data analysis. Deeper dive into building business dashboards by combining knitr with automated jobs.
+Case study with library data, going through the entire process of data analysis. Deeper dive into building business dashboards by combining `knitr` with automated jobs.
 
 ## April 26, 2016 - Emergent: intermediate R
 
@@ -35,5 +39,3 @@ A crash course into the R language. Hands-on case study where decision trees are
 ## April 14, 2015 - Women in Machine Learnng, NY
 
 A crash course into the R language. Hands-on case study where data from the Open Movie Databases is imported, cleaned, modelled, visualized and finally reported.
-
-
