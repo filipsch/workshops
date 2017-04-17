@@ -6,3 +6,4 @@
 *.html
 */*.pdf
 *.pdf
+.ipynb_checkpoints/*
