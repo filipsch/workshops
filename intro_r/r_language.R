@@ -90,7 +90,7 @@ results
 results$scores
 
 # mean is a base R function
-mean(results$scores) 
+mean(results$scores)
 
 my_mean <- function(a, b) {
   ( a + b ) / 2
@@ -102,7 +102,7 @@ my_mean(5, 2)
 # Change FALSE to TRUE to run
 if (FALSE) {
   datatable(results) # function the DT package
-  install.packages("DT")  
+  install.packages("DT")
 }
 
 library(DT)
