@@ -1,4 +1,4 @@
-# Case study
+# Case study: Movies
 
 Typical actions you perform on your data:
 
@@ -11,9 +11,12 @@ Typical actions you perform on your data:
 Goal of this case study: investigate movie ratings from IMdB and Rotten Tomatoes.
 
 ```{r}
-# Prepare R session
-# setwd("cs_movies")
+# Remove all elements from workspace
 rm(list = ls())
+
+# Change working directory
+project_path <- "~/workspace/workshop"
+setwd(file.path(project_path, "cs_movies"))
 ```
 
 ## Import
@@ -21,7 +24,7 @@ rm(list = ls())
 - R can deal with many sources, online and offline
 - Dedicated application-specific packages (DBs, excel, text files)
 
-We read the IMdB data from an SQLite database:
+We read the IMdB data from a SQLite database:
 
 ```{r, echo = FALSE}
 # install.packages("RSQLite")
@@ -172,4 +175,4 @@ movies_overall %>%
 - This file is an example of reproducible reporting!
 - R Markdown: R code and normal markdown text interwoven
 - Change R code: report changes accordingly
-- Simply hit Knit HTML
+- Simply hit Knit HTML in RStudio

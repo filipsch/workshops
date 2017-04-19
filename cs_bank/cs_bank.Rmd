@@ -1,4 +1,4 @@
-## Case study
+# Case study: Bank data
 
 Typical steps of an analysis in R:
 
@@ -19,8 +19,14 @@ Typical steps of an analysis in R:
 ## Import
 
 ```{r import}
-# Change to path of cs_bank/
-setwd("~/workspace/r-workshop/cs_bank/")
+# Remove previous elements from workspace
+rm(list = ls())
+
+# Change working directory
+project_path <- "~/workspace/workshop"
+setwd(file.path(project_path, "cs_bank"))
+
+# Import data in bank.csv
 bank <- read.csv("bank.csv", sep = ";")
 ```
 
