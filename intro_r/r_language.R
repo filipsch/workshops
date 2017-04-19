@@ -1,37 +1,10 @@
-# Introduction to R
-
-- This is R Markdown
-- Combine text and code easily
-- Reproducible outcome
-- Easy to share
-- Different from an R script
-
-## Fundamentals
-
-- Explore the console: simple calculations
-- Variable assignment: `<-`
-- Different data types: numeric, character, logical
-- As you execute R commands, you accumulate a workspace.
-- R scripts: Lines of R code, executed one after the other
-
-```{r}
+## ------------------------------------------------------------------------
 score <- 12
 course <- "algebra"
 passed <- TRUE
 ls()
-```
 
-## Data structures
-
-### Vectors
-
-- 1 Dimensional
-- Single type
-- `c()`
-- Subsetting with `[ ]`
-- Element-wise calculations
-
-```{r}
+## ------------------------------------------------------------------------
 # creation
 scores <- c(12, 17, 19, 9)
 scores
@@ -56,16 +29,8 @@ scores - other_scores
 # Q1: what will scores[3] return?
 # Q2: what will scores[-1] return?
 # Q3: What will other_scores / 2 return?
-```
 
-### Lists
-
-- 1 Dimensional
-- Different types: numerics, logicals, vectors, lists ...
-- `list()`
-- Subsetting with `[[ ]]`
-
-```{r}
+## ------------------------------------------------------------------------
 summ <- list("algebra", 12, TRUE, "physics", 17, TRUE, "management", 19, TRUE, "religion", 9, FALSE)
 summ
 str(summ)
@@ -94,17 +59,8 @@ summ3[[3]][["score"]]
 # Q1: how to get 'management'?
 # Q2: how to get the score for physics?
 # Q3: What's the difference between summ3[1] and summ3[[1]]?
-```
 
-### Data Frames
-
-- 2 Dimensional
-- Heterogeneous content
-- Typical structure for data sets: rows are observations, columns are variables.
-- `data.frame()` function
-- Different ways of subsetting
-
-```{r}
+## ------------------------------------------------------------------------
 options(stringsAsFactors = FALSE)
 
 # 3 same-length vectors
@@ -127,59 +83,32 @@ str(results)
 
 # Q1: How to get all the passed column, as a vector?
 # Q2: How to get all the passed column, as a single-column data frame?
-```
 
-## Functions and Packages
-
-### Functions
-
-- Tons of them available in R.
-- Solve particular, well-defined problem.
-- You already used them! `c()`, `list()`, etc.
-- Black Box Principle
-- Can also write your own.
-    
-```{r}
+## ------------------------------------------------------------------------
 # What is your average score?
 results
 results$scores
 
 # mean is a base R function
-mean(results$scores)
+mean(results$scores) 
 
 my_mean <- function(a, b) {
   ( a + b ) / 2
 }
 
 my_mean(5, 2)
-```
 
-### R Packages
-
-R Packages: sets of R functions, data and compiled code to help solve a typical problem. Packages for visualization, high frequency trading, advanced statistical analyses, SOTA machine learning implementations. Most of them are on [CRAN](http://cran.r-project.org/), the _Comprehensive R Archive Network_. Google is your friend!
-
-```{r}
+## ------------------------------------------------------------------------
 # Change FALSE to TRUE to run
 if (FALSE) {
   datatable(results) # function the DT package
-  install.packages("DT")
+  install.packages("DT")  
 }
 
 library(DT)
 datatable(results)
-```
 
-## Let's practice!
-
-Go to https://www.datacamp.com/courses/2310
-
-## Other programming concepts (extra)
-
-### Control Structures
-
-Use results of comparators to customize behavior
-
-```{r}
+## ------------------------------------------------------------------------
 temp_celsius <- 68
 if(temp_celsius <= 0) {
   print("Brrrr!")
@@ -204,5 +133,4 @@ hobbies <- c("cycling", "movies", "data science")
 for(h in hobbies) {
   print(h)
 }
-```
 

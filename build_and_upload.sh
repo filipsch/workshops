@@ -1,6 +1,8 @@
 # Convert intro.Rmd to PDF
 tit=sagioworkshop
 
+R -e 'rmarkdown::render("introduction.Rmd"); rmarkdown::render(input = "intro_r/r_language.Rmd"); knitr::purl(input = "intro_r/r_language.Rmd", output = "intro_r/r_language.R")'
+
 # Zip all files
 zip -r $tit.zip introduction.Rmd introduction.html intro_r cs_movies cs_bank
 

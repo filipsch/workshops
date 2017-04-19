@@ -4,6 +4,7 @@ author: Filip Schouwenaars, DataCamp
 output: ioslides_presentation
 ---
 
+<!--
 ## About DataCamp
 
 - Online Data Science School
@@ -19,6 +20,7 @@ output: ioslides_presentation
 - Mainly computer scientists
 - Still studying? No problem!
 - Get in touch: filip@datacamp.com
+-->
 
 ## About the Workshop
 
