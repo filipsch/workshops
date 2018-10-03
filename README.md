@@ -1,4 +1,4 @@
-# Workshops and talks about R
+# Workshops about R
 
 ## April 19, 2017 - Sagio (Leuven)
 
@@ -11,14 +11,6 @@ Introduction to the basics of R and Python, and their data structures. Highlight
 ## October 29, 2016 - Data 4 Good Challenge (Leuven)
 
 An introduction to the basics of R, such as vectors, list and data frames. Case study on geographical data to plot unemployment in Germany's states, and case study on bank data in a marketing context.
-
-## October 14, 2016 - eRum 2016 (Poznan, Poland)
-
-Presentation of the [tutorial package](https://github.com/datacamp/tutorial), a wrapper around the DataCamp Light project to make your reports interactive playgrounds. The slides and other documents can be found [here](https://github.com/filipsch/erum2016-tutorial).
-
-## June 30, 2016 - UseR 2016 (Stanford)
-
-Presentation of the [tutorial package](https://github.com/datacamp/tutorial), a wrapper around the DataCamp Light project to make your reports interactive playgrounds. The slides and other documents can be found [here](https://github.com/filipsch/erum2016-tutorial).
 
 ## April 28, 2016 - Quivr
 
